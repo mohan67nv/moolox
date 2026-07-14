@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "@moolox/types": "workspace:*",
-    "@swc/core": "^1.10.18"
+    "@swc/core": "^1.10.18",
+    "fflate": "^0.8.2"
   },
   "devDependencies": {
     "@types/node": "^22.13.0",
