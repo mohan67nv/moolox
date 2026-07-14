@@ -1,9 +1,13 @@
 /**
- * @moolox/billing — Stripe billing and subscription management
+ * @moolox/billing — Enterprise Billing, Stripe Webhooks & Free Quota Enforcement
  *
- * Feature IDs: BIL-01 BIL-02 BIL-03 BIL-04 BIL-05 BIL-06
+ * Feature IDs:
+ * - BIL-001: Stripe Webhook & Subscription Lifecycle Handler
+ * - BIL-002: Free Quota Gate (`500 Free AI Credits / Month`)
  *
  * Copyright © 2026 Moolox. All Rights Reserved.
  */
 
-export {};
+export * from './types';
+export * from './quotas/FreeQuotaGate';
+export * from './webhooks/StripeHandler';

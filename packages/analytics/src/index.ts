@@ -1,9 +1,11 @@
 /**
- * @moolox/analytics — OpenTelemetry observability and telemetry
+ * @moolox/analytics — OpenTelemetry Observability & Distributed Telemetry Engine
  *
- * Feature IDs: ANA-01 ANA-02 ANA-03 ANA-04 ANA-05
+ * Feature IDs:
+ * - ANA-001: OpenTelemetry Distributed Tracing & Pipeline Observability
  *
  * Copyright © 2026 Moolox. All Rights Reserved.
  */
 
-export {};
+export * from './types';
+export * from './tracing/OTelTracer';
