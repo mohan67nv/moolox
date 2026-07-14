@@ -30,11 +30,20 @@ This ledger tracks the exact completion status, feature IDs, and git commits acr
 
 ---
 
-## 🚀 Sprint 2 — Token System Engine & W3C Style Resolver (`@moolox/tokens`)
+## 🏁 Sprint 2 — Design Tokens Law & React 19 Canvas Engine
+- **Status**: ✅ **COMPLETED & APPROVED**
+- **Sprint Objectives**: Implement exact W3C Design Token Schema parser (`TKN-001`), dynamic CSS custom property / utility variable injector (`TKN-002: < 5ms`), Hardcoded Token Enforcement Rule Engine & Zero-Hex Law (`TKN-003: Euclidean RGB distance math`), 11 Built-In Core Component Specifications (`CMP-001`), React 19 virtualized DOM canvas renderer (`CNV-001: 60fps`), Viewport Matrix Switcher (`CNV-003`), Wireframe Inspect Mode (`CNV-004`), Right-Hand Property Inspector (`CNV-002: < 15ms sub-tree sync`), and Live Theme Studio (`TKN-004`, `TKN-005`).
+- **Completed Tasks & Commit Registry**:
+  | Task | Package | Feature IDs | Git Commit | Key Deliverables |
+  | :--- | :--- | :--- | :--- | :--- |
+  | **Task 2.1** | `@moolox/tokens` | `TKN-002`, `TKN-003` | `d445e11` | `compileTokenMapToCSS` (`< 5ms`), `enforceTokenResolution` (3D RGB Euclidean distance auto-mapping), `validateNoRawHexOrAdhocValues`, `sanitizeNodeTokens`. |
+  | **Task 2.2** | `@moolox/ast-core` | `CMP-001` | `8154e4d` | `CORE_COMPONENTS_REGISTRY` containing all 11 canonical specifications (`HeroSpec`, `NavigationSpec`, `PricingTableSpec`, `FeatureGridSpec`, `TestimonialCarouselSpec`, `FAQAccordionSpec`, `ContactFormSpec`, `FooterSpec`, `CTABannerSpec`, `BlogGridSpec`, `TeamMatrixSpec`). |
+  | **Task 2.3** | `@moolox/web` | `CNV-001`, `CNV-003`, `CNV-004` | `fad452d` | `CanvasRenderer` (`60fps virtualized DOM`), `ViewportMatrixSwitcher` (`375px mobile`, `768px tablet`, `1440px desktop`), `WireframeToggle` (`outline-dashed` inspection). |
+  | **Task 2.4** | `@moolox/web` | `CNV-002`, `TKN-004`, `TKN-005` | `fad452d` | `PropertyInspector` (`< 15ms` sub-tree live property patching), `ThemeSwitcher` (`light/dark/high-contrast`), `BRAND_KIT_PRESETS` (`Cyberpunk`, `Fintech`, `Editorial`, `SaaS`). |
+- **Git Branch**: `dev`
+
+---
+
+## 🚀 Sprint 3 — 3-Agent AI Loop, Edge Publishing & `v0.5 Alpha` Exit Gate
 - **Status**: 🔄 **IN PROGRESS**
-- **Sprint Objectives**: Implement exact W3C Design Token Schema parser (`TKN-003`), dynamic CSS custom property / utility variable injector (`TKN-002`), bidirectional Tailwind CSS class-to-token mapping engine (`TKN-004`), instant canvas live theme switching engine (`TKN-005`), and atomic token mutation resolver (`TKN-006`).
-- **Target Tasks**:
-  - `Task 2.1`: W3C Design Token Schema Parser & CSS Custom Property Injector (`TKN-002`, `TKN-003`).
-  - `Task 2.2`: Tailwind CSS Class-to-Token Mapping & Resolving Engine (`TKN-004`).
-  - `Task 2.3`: Live Canvas Theme Switcher Engine (`TKN-005`).
-  - `Task 2.4`: Atomic Token Mutator & Cascading Reference Validator (`TKN-006`).
+- **Sprint Objectives**: Connect `Cmd+K Bar` (`AI-001`) to our 3-Agent Atomic AI Loop (`Haiku Router -> Sonnet Generator -> Static Linter Gate`) via Server-Sent Events (`SSE`). Build 1-click static Next.js edge compiler (`DEP-001`), Cloudflare R2 + Edge KV Anycast publisher (`DEP-002`), Instant Rollback (`DEP-003`), Stripe webhooks (`BIL-001`), Free Quotas (`BIL-002`), and OpenTelemetry tracing (`ANA-001`). **EXECUTE `v0.5 ALPHA` CERTIFIED INTERNAL LAUNCH.**
