@@ -1,9 +1,16 @@
 /**
- * @moolox/auth — Edge JWT authentication and RBAC middleware
+ * @moolox/auth — Edge Authentication, Identity, RBAC & Billing Gate
  *
- * Feature IDs: AUTH-01 AUTH-02 AUTH-03 AUTH-04 AUTH-05 AUTH-06
+ * Feature IDs: AUTH-001, AUTH-002, AUTH-003, AUTH-004
+ *
+ * Single source of truth for edge JWT signature verification, workspace RBAC
+ * permission matrix, metered AI credit billing checks, and enterprise SSO bridges.
  *
  * Copyright © 2026 Moolox. All Rights Reserved.
  */
 
-export {};
+export * from './jwks';
+export * from './rbac';
+export * from './billing-gate';
+export * from './sso';
+export * from './middleware';

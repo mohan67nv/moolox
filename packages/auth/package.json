@@ -7,13 +7,21 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "echo 'lint pass'",
-    "clean": "rm -rf dist .turbo"
+    "clean": "rm -rf dist .turbo coverage"
   },
   "dependencies": {
-    "@moolox/types": "workspace:*"
+    "@clerk/backend": "^1.24.0",
+    "@clerk/nextjs": "^6.12.0",
+    "@moolox/db": "workspace:*",
+    "@moolox/types": "workspace:*",
+    "jose": "^6.0.8"
   },
   "devDependencies": {
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
   }
 }
