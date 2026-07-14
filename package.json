@@ -1,0 +1,26 @@
+{
+  "name": "@moolox/root",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Moolox — AI-Powered Digital Experience Operating System",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": "Moolox <engineering@moolox.com>",
+  "packageManager": "pnpm@11.13.0",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=11.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.9.5",
+    "turbo": "^2.10.4"
+  }
+}
