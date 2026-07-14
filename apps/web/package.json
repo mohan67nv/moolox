@@ -8,12 +8,17 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf .next .turbo"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf .next .turbo coverage"
   },
   "dependencies": {
+    "@moolox/ast-core": "workspace:*",
+    "@moolox/types": "workspace:*",
     "next": "^15.3.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -22,6 +27,7 @@
     "typescript": "^5.8.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.3.0",
-    "@eslint/eslintrc": "^3.0.0"
+    "@eslint/eslintrc": "^3.0.0",
+    "vitest": "^3.2.0"
   }
 }
