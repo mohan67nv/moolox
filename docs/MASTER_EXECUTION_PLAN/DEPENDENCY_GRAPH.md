@@ -98,7 +98,7 @@ The following table establishes the exact upstream unblocking prerequisite chain
 | **`AI-04`** | Static Quality Gate (`@dios/ai`) | `AST-03` (`Sub-Tree Diff Engine`) | Static linters (`axe-core / DOMPurify`) intercept `ASTMutationPatch` payloads before they are applied to active project state. |
 | **`DEP-01`** | Static `/out` Compiler (`@dios/deploy`)| `AST-02`, `TKN-02` (`Tailwind Compiler`)| Static publishing requires serializing AST to clean TSX (`serializeAST`) and bundling compiled Tailwind CSS chunks. |
 | **`DEP-02`** | R2 + Edge KV Publisher (`@dios/deploy`)| `DEP-01` (`Static /out Compiler`) | Cloudflare R2 uploader requires compiled static HTML/JS bundles before executing PUT requests and updating Edge KV. |
-| **`GIT-01`** | GitHub App Linker (`@dios/git`) | `AUTH-04` (`GitHub OAuth & PAT Bridge`)| Linking workspace projects to GitHub repositories requires authenticated user OAuth PAT access tokens. |
+| **`GIT-001`** | GitHub App Linker (`@moolox/git`) | `AUTH-007` (`GitHub Credential Authorization Bridge`)| Linking workspace projects to GitHub repositories requires authenticated, least-privilege GitHub App installation credentials. |
 | **`GIT-02`** | Clean Next.js Exporter (`@dios/git`) | `AST-02`, `TKN-02` (`Tailwind Compiler`)| Generating buildable Next.js 15 repository files requires clean AST code serialization and CSS file extraction. |
 | **`GIT-04`** | Incoming Webhook Puller (`@dios/git`)| `GIT-01`, `AST-02` (`SWC TSX Parser`) | Webhooks receiving push events must parse raw TSX files via SWC visitor before updating active canvas sessions. |
 | **`MKT-03`** | Stripe Connect 80/20 (`@dios/marketplace`)| `MKT-02`, `BIL-01` (`Stripe Webhook`) | Split payouts require active Stripe Connect Express onboarding checkouts and verified subscription webhooks. |
@@ -106,6 +106,19 @@ The following table establishes the exact upstream unblocking prerequisite chain
 | **`COL-01`** | `IASTCollaborative` CRDT (`@dios/ast-core`)| `AST-01` (`IASTNode Schema`) | Conflict-free replicated data structures (`Yjs`) wrap base `IASTNode` JSON properties into durable `Y.Map` trees. |
 | **`ENT-03`** | GDPR eu-west-1 Shards (`@dios/enterprise`)| `DEP-02`, `ENT-01` (`Enterprise Schema`) | Data residency enforcement requires enterprise org context and region-aware edge Anycast storage routing. |
 | **`SDK-01`** | Headless REST APIs (`@dios/sdk`) | `AUTH-06`, `PRJ-01` (`Project Metadata`) | Public API requests must verify `Authorization: Bearer` API tokens against workspace permissions before accessing project state. |
+| **`GIT-007`** | Webhook Delivery Ledger (`@moolox/git`) | `GIT-001`, `GIT-003`, `GIT-004`, `INF-002`, `WS-005` | Reliable replay requires authenticated installations, durable jobs, completed inbound/outbound sync, and append-only audit events. |
+| **`GIT-008`** | Drift Reconciliation (`@moolox/git`) | `GIT-004`, `GIT-005`, `GIT-007` | Safe remote-state convergence requires inbound synchronization, structural merge behavior, and an idempotent delivery history. |
+| **`MIG-001`** | Database Migration Discipline (`@moolox/db`) | `DB-001`, `DB-002` | Restore, data lifecycle, and future schema activation require deterministic versioned migrations and drift detection. |
+| **`BKP-001`** | PITR Backup & Restore (`@moolox/db`) | `DB-001`, `MIG-001`, `ANA-001` | Recovery verification requires the database baseline, reproducible migrations, and observable restore jobs. |
+| **`SEC-001`** | Application Edge Security (`@moolox/auth`, `apps/web`) | `AUTH-001`, `AUTH-002`, `INF-001` | Browser, origin, tenant-authorization, and rate controls build on authenticated request context and shared rate-limit infrastructure. |
+| **`SEC-002`** | Credential & Key Lifecycle (`@moolox/auth`, `@moolox/git`) | `AUTH-007`, `GIT-001`, `ANA-001` | Rotation and revocation require the GitHub credential boundary, installation lifecycle, and auditable access. |
+| **`TST-001`** | Production Assurance CI | `MIG-001`, `SEC-001`, `GIT-007` | Merge protection must exercise migrations, security controls, and webhook replay behavior. |
+| **`OPS-001`** | SLOs, Alerting & Incident Response | `ANA-001`, `INF-002`, `DEP-002`, `BKP-001`, `GIT-007` | Operational response requires telemetry, durable jobs, publishing signals, recovery status, and Git delivery status. |
+| **`A11Y-001`** | Platform WCAG 2.2 AA | `CNV-001..004`, `TST-001` | Product-interface conformance requires completed core canvas interactions and enforced regression testing. |
+| **`DLC-001`** | Retention & Deletion | `AUTH-002`, `DB-001`, `WS-005`, `BKP-001` | Verified erasure requires authorization, the data baseline, backup tombstones, and immutable audit receipts. |
+| **`DLC-002`** | Portability & DSAR Export | `DLC-001`, `PRJ-001`, `WS-005` | Complete tenant export depends on lifecycle rules, project data ownership, and audited authorization. |
+| **`API-001`** | API Compatibility Contract | `CORE-002`, `AUTH-006`, `SDK-001` | A public compatibility contract depends on the internal router, scoped credentials, and public API surface. |
+| **`SEC-003`** | Supply-Chain Integrity & Provenance | `TST-001`, `GIT-006` | Signed, scanned releases require the production CI gate and customer-facing GitHub action packaging pipeline. |
 
 ---
 

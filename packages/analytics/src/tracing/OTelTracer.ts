@@ -87,9 +87,9 @@ export class OTelTracer {
       totalDuration += dur;
       if (span.status === 'error') errorSpans++;
 
-      if (!byName[span.name]) byName[span.name] = { totalDuration: 0, count: 0 };
-      byName[span.name].totalDuration += dur;
-      byName[span.name].count += 1;
+      const entry = (byName[span.name] ??= { totalDuration: 0, count: 0 });
+      entry.totalDuration += dur;
+      entry.count += 1;
     }
 
     const spansByName: Record<string, { count: number; avgDurationMs: number }> = {};

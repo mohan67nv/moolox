@@ -8,7 +8,6 @@
  */
 
 import React from 'react';
-import { type TokenMetadata } from '@moolox/types';
 
 export type ColorMode = 'light' | 'dark' | 'high-contrast';
 

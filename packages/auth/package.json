@@ -18,7 +18,9 @@
     "@clerk/nextjs": "^6.12.0",
     "@moolox/db": "workspace:*",
     "@moolox/types": "workspace:*",
-    "jose": "^6.0.8"
+    "drizzle-orm": "^0.39.0",
+    "jose": "^6.0.8",
+    "next": "^15.0.0"
   },
   "devDependencies": {
     "typescript": "^5.8.0",

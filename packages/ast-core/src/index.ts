@@ -17,3 +17,4 @@ export * from './diff/patcher';
 export * from './compress/zstd';
 export * from './prune/window';
 export * from './components/coreSpecs';
+export type { ASTMutationPatch as ASTPatchOperation } from '@moolox/types';

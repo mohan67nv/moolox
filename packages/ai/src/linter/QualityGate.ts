@@ -101,7 +101,7 @@ export class QualityGate implements IAgentExecutor {
 
     // Check heading hierarchy order (h1 -> h2 -> h3)
     const headingMatch = typeof node.type === 'string' ? node.type.match(/^h([1-6])$/) : null;
-    if (headingMatch) {
+    if (headingMatch && headingMatch[1]) {
       const level = parseInt(headingMatch[1], 10);
       headingLevels.push(level);
     }

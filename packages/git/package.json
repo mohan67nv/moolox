@@ -7,13 +7,21 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "echo 'lint pass'",
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@moolox/types": "workspace:*"
+    "@moolox/types": "workspace:*",
+    "@moolox/ast-core": "workspace:*",
+    "@moolox/tokens": "workspace:*",
+    "@moolox/db": "workspace:*",
+    "@moolox/auth": "workspace:*",
+    "drizzle-orm": "^0.39.0"
   },
   "devDependencies": {
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
   }
 }

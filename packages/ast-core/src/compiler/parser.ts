@@ -109,11 +109,11 @@ class JSXASTVisitor {
       } else if (
         item.type === 'ExportDefaultDeclaration' &&
         item.decl &&
-        item.decl.type === 'FunctionDeclaration' &&
+        item.decl.type === 'FunctionExpression' &&
         item.decl.body
       ) {
         // Traverse default exported functional component body for return statement
-        for (const stmt of item.decl.body.body) {
+        for (const stmt of item.decl.body.stmts) {
           if (stmt.type === 'ReturnStatement' && stmt.argument && isJSXExpression(stmt.argument)) {
             const node = this.visitJSXExpression(stmt.argument);
             if (node) results.push(node);
@@ -132,8 +132,8 @@ class JSXASTVisitor {
             if (isJSXExpression(body)) {
               const node = this.visitJSXExpression(body);
               if (node) results.push(node);
-            } else if (body.type === 'BlockStatement') {
-              for (const stmt of body.body) {
+            } else if (body && body.type === 'BlockStatement' && 'stmts' in body) {
+              for (const stmt of (body as swc.BlockStatement).stmts) {
                 if (stmt.type === 'ReturnStatement' && stmt.argument && isJSXExpression(stmt.argument)) {
                   const node = this.visitJSXExpression(stmt.argument);
                   if (node) results.push(node);
@@ -153,7 +153,7 @@ class JSXASTVisitor {
       return this.visitJSXElement(expr);
     } else if (expr.type === 'JSXFragment') {
       return this.visitJSXFragment(expr);
-    } else if (expr.type === 'ParenthesizedExpression') {
+    } else if (expr.type === 'ParenthesisExpression') {
       return this.visitJSXExpression(expr.expression);
     }
     return null;
@@ -165,7 +165,7 @@ class JSXASTVisitor {
     const styles: Record<string, string> = {};
     let customNodeId: ASTNodeId | null = null;
 
-    for (const attr of element.opening.attrs) {
+    for (const attr of (element.opening.attributes || [])) {
       if (attr.type === 'JSXAttribute' && attr.name.type === 'Identifier') {
         const attrName = attr.name.value;
         const attrValue = extractJSXAttributeValue(attr.value);
@@ -239,8 +239,8 @@ class JSXASTVisitor {
     } else if (child.type === 'JSXFragment') {
       return this.visitJSXFragment(child);
     } else if (child.type === 'JSXText') {
-      const textContent = child.value.replace(/\s+/g, ' ');
-      if (!textContent.trim()) {
+      const textContent = child.value.replace(/\s+/g, ' ').trim();
+      if (!textContent) {
         return null; // Ignore whitespace-only JSXText
       }
       return {
@@ -266,10 +266,10 @@ class JSXASTVisitor {
 }
 
 /** Helper to check if SWC expression is JSX */
-function isJSXExpression(expr: unknown): expr is swc.JSXElement | swc.JSXFragment | swc.ParenthesizedExpression {
+function isJSXExpression(expr: unknown): expr is swc.JSXElement | swc.JSXFragment | swc.ParenthesisExpression {
   if (!expr || typeof expr !== 'object') return false;
   const t = (expr as { type?: string }).type;
-  return t === 'JSXElement' || t === 'JSXFragment' || t === 'ParenthesizedExpression';
+  return t === 'JSXElement' || t === 'JSXFragment' || t === 'ParenthesisExpression';
 }
 
 /** Resolves opening JSXElementName (`div`, `Hero.Title`, etc.) */

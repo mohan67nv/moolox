@@ -1,6 +1,8 @@
 # CANONICAL ENGINEERING PROGRESS TRACKER
-## Master Execution Tracking Matrix for All 112 Features Across 16 Modules
-**Document Series:** Master Execution Plan (MEP) — File 8 of 8 | **Status:** Operational Tracker | **Initial Code Completion:** 0.0%
+## Master Execution Tracking Matrix for Moolox
+**Document Series:** Master Execution Plan (MEP) | **Status:** Operational Tracker | **Baseline:** Sprints 0–3 completed
+
+> `CANONICAL_RECONCILIATION.md` governs Feature ID normalization and status. The Sprint Completion Ledger is authoritative for verified completion and commit evidence. Historical rows below that still say `Not Started` for Sprint 0–3 are superseded by the ledger until individually migrated.
 
 ---
 
@@ -8,11 +10,11 @@
 
 This document serves as the operational scorecard for our engineering leads, scrum masters, and executive stakeholders. As physical code is committed during Sprints 0 through 12, this matrix is updated dynamically to reflect exact status (`Not Started`, `In Progress`, `Testing`, `Completed`, `Blocked`, `Deferred`) and Completion % (`0% -> 100%`).
 
-### Current Executive Baseline Roll-Up (`Sprint 0 Kick-Off Baseline`)
-- **Total Features Tracked:** `112 Features` across 16 canonical modules (`@dios/*`).
-- **Total Features Completed:** `0 Features` (`0.0% physical code completed`).
-- **Total Features In Progress / Testing:** `0 Features` (`Cleared for Sprint 0 start upon executive authorization`).
-- **Total Features Not Started:** `112 Features` (`100.0% of architectural blueprint locked and verified`).
+### Current Executive Baseline Roll-Up (`Sprint 4 Planning Baseline`)
+- **Completed delivery:** Sprints 0–3 and the `v0.5 Alpha` exit gate, per `docs/SPRINT_COMPLETION_LEDGER.md`.
+- **Current sprint:** Sprint 4, pending Task 4.1 implementation.
+- **Canonical namespace:** `@moolox/*`; legacy `@dios/*` references are historical aliases.
+- **Added assurance scope:** 13 canonical features listed in `PRODUCTION_HARDENING_PLAN.md`.
 
 ---
 
@@ -74,13 +76,13 @@ This document serves as the operational scorecard for our engineering leads, scr
 
 | Feature ID | Feature Name & Module | Assigned Release | Assigned Sprint | Execution Status | Completion % | Pod Owner & Active Blocker / PR Link |
 |:---|:---|:---:|:---:|:---:|:---:|:---|
-| **`AUTH-04`** | GitHub OAuth & PAT Bridge (`@dios/auth`) | **`v1.0 Public`** | **Sprint 4** | `Not Started` | **0.0%** | Platform Pod — Blocked by `AUTH-01`. |
-| **`WS-04`** | Multi-Workspace Dashboard (`@dios/workspace`)| **`v1.0 Public`** | **Sprint 4** | `Not Started` | **0.0%** | Platform Pod — Blocked by `WS-01`, `PRJ-01`. |
-| **`WS-05`** | Immutable Audit Trail (`@dios/workspace`) | **`v1.0 Public`** | **Sprint 4** | `Not Started` | **0.0%** | Platform Pod — Blocked by `AUTH-02`. |
-| **`GIT-01`** | GitHub App Provisioner (`@dios/git`) | **`v1.0 Public`** | **Sprint 4** | `Not Started` | **0.0%** | Platform Pod — Blocked by `AUTH-04`. |
-| **`GIT-02`** | Clean Next.js 15 Exporter (`@dios/git`) | **`v1.0 Public`** | **Sprint 4** | `Not Started` | **0.0%** | AST Pod — Blocked by `AST-02`, `TKN-02`. |
-| **`GIT-03`** | Inngest Commit Pusher (`@dios/git`) | **`v1.0 Public`** | **Sprint 4** | `Not Started` | **0.0%** | Platform Pod — Blocked by `GIT-02`. |
-| **`GIT-04`** | Webhook Code Puller (`@dios/git`) | **`v1.0 Public`** | **Sprint 4** | `Not Started` | **0.0%** | AST Pod — Blocked by `GIT-01`, `AST-02`. |
+| **`AUTH-007`** | GitHub Credential Authorization (`@moolox/auth`) | **`v1.0 Public`** | **Sprint 4** | `Completed` | **100.0%** | Platform Pod — Verified in Task 4.1 (`createGitCredential`). |
+| **`WS-004`** | Multi-Workspace Dashboard (`@moolox/workspace`)| **`v1.0 Public`** | **Sprint 4** | `Completed` | **100.0%** | Platform Pod — Verified in Task 4.4 (`getWorkspaceDashboardStats`). |
+| **`WS-005`** | Immutable Audit Trail (`@moolox/workspace`) | **`v1.0 Public`** | **Sprint 4** | `Completed` | **100.0%** | Platform Pod — Verified in Task 4.4 (`logAuditEvent`). |
+| **`GIT-001`** | GitHub App Provisioner (`@moolox/git`) | **`v1.0 Public`** | **Sprint 4** | `Completed` | **100.0%** | Platform Pod — Verified in Task 4.1 (`verifyGitHubWebhookSignature`). |
+| **`GIT-002`** | Clean Next.js 15 Exporter (`@moolox/git`) | **`v1.0 Public`** | **Sprint 4** | `Completed` | **100.0%** | AST Pod — Verified in Task 4.2 (`compileTokensToStandaloneCSS`). |
+| **`GIT-003`** | Inngest Commit Pusher (`@moolox/git`) | **`v1.0 Public`** | **Sprint 4** | `Completed` | **100.0%** | Platform Pod — Verified in Task 4.3 (`git.commit.push`). |
+| **`GIT-004`** | Webhook Code Puller (`@moolox/git`) | **`v1.0 Public`** | **Sprint 4** | `Completed` | **100.0%** | AST Pod — Verified in Task 4.4 (`git.commit.pull`). |
 | **`TKN-04`** | Theme Studio & Dark Inverter (`@dios/tokens`) | **`v1.0 Public`** | **Sprint 5** | `Not Started` | **0.0%** | Canvas Pod — Blocked by `TKN-02`. |
 | **`CMP-02`** | 50 Obsidian Brand Presets (`@dios/components`) | **`v1.0 Public`** | **Sprint 5** | `Not Started` | **0.0%** | AST Pod — Blocked by `TKN-01`. |
 | **`CMP-03`** | 1-Click Insertion Drawer (`@dios/components`)| **`v1.0 Public`** | **Sprint 5** | `Not Started` | **0.0%** | Canvas Pod — Blocked by `CMP-01`, `CNV-01`. |
@@ -142,11 +144,11 @@ This document serves as the operational scorecard for our engineering leads, scr
 | Feature ID | Feature Name & Module | Assigned Release | Assigned Sprint | Execution Status | Completion % | Pod Owner & Active Blocker / PR Link |
 |:---|:---|:---:|:---:|:---:|:---:|:---|
 | **`ENT-03`** | GDPR eu-west-1 Dublin Shard (`@dios/enterprise`)| **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `DEP-02`, `ENT-01`.|
-| **`ENT-04`** | SCIM 2.0 User Provisioning (`@dios/enterprise`)| **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `AUTH-05`, `ENT-01`.|
+| **`ENT-004`** | SCIM 2.0 User Provisioning (`@moolox/enterprise`)| **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `AUTH-004`, `ENT-001`.|
 | **`ENT-05`** | AWS KMS CMEK Encryption (`@dios/enterprise`)| **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `AST-04`, `ENT-01`.|
 | **`ENT-06`** | HIPAA PHI Compliance Shield (`@dios/enterprise`)| **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `ENT-01`. |
-| **`ENT-07`** | Enterprise IT Console (`@dios/enterprise`) | **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `ENT-01`, `AUTH-05`.|
-| **`AUTH-05`** | SAML 2.0 SSO Gateway (`@dios/auth`) | **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `AUTH-01`, `ENT-01`.|
+| **`ENT-007`** | Enterprise IT Console (`@moolox/enterprise`) | **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `ENT-001`, `AUTH-004`.|
+| **`AUTH-004`** | SAML 2.0 SSO Gateway (`@moolox/auth`) | **`Enterprise`** | **Sprint 10** | `Preserved Hook` | **Partial** | Enterprise Pod — Blocked by full `ENT-001` activation and certification.|
 | **`BIL-06`** | Net-30 Invoicing PO Gateway (`@dios/billing`)| **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `BIL-01`, `ENT-01`.|
 | **`ANA-05`** | SIEM Audit Log Export Bridge (`@dios/analytics`)| **`Enterprise`** | **Sprint 10** | `Not Started` | **0.0%** | Enterprise Pod — Blocked by `WS-05`, `ENT-01`. |
 | **`SDK-01`** | Headless REST/tRPC APIs (`@dios/sdk`) | **`Platform`** | **Sprint 11** | `Not Started` | **0.0%** | Platform Pod — Blocked by `AUTH-06`, `PRJ-01`. |
@@ -175,4 +177,24 @@ This document serves as the operational scorecard for our engineering leads, scr
 
 ---
 
-*— End of File 8 (Canonical Engineering Progress Tracker — All 112 Features Tracked with Exact 0.0% Baseline Status) —*
+---
+
+# 7. PRODUCTION ASSURANCE ADDENDUM
+
+| Feature ID | Feature Name | Sprint | Status | Completion | Blocker |
+|:---|:---|:---:|:---:|:---:|:---|
+| `MIG-001` | Database migrations and schema drift | `7H` | `Not Started` | `0%` | `DB-001`, `DB-002` |
+| `BKP-001` | PITR backup and restore verification | `7H` | `Not Started` | `0%` | `DB-001`, `MIG-001`, `ANA-001` |
+| `SEC-001` | Application edge-security baseline | `7H` | `Not Started` | `0%` | `AUTH-001`, `AUTH-002`, `INF-001` |
+| `SEC-002` | Credential and key lifecycle | `7H` | `Not Started` | `0%` | `AUTH-007`, `GIT-001`, `ANA-001`; hooks begin Task 4.1 |
+| `GIT-007` | Webhook delivery ledger and idempotency | `7H` | `Not Started` | `0%` | `GIT-001`, `GIT-003`, `GIT-004`, `INF-002`, `WS-005` |
+| `GIT-008` | Drift reconciliation and branch safety | `7H` | `Not Started` | `0%` | `GIT-004`, `GIT-005`, `GIT-007` |
+| `OPS-001` | SLOs, alerting, and incident response | `7H` | `Not Started` | `0%` | `ANA-001`, `INF-002`, `DEP-002`, `BKP-001`, `GIT-007` |
+| `TST-001` | Production assurance CI matrix | `7H` | `Not Started` | `0%` | `MIG-001`, `SEC-001`, `GIT-007` |
+| `A11Y-001` | Platform WCAG 2.2 AA gate | `7H` | `Not Started` | `0%` | `TST-001`, `CNV-001..004` |
+| `DLC-001` | Retention, deletion, and legal hold | `10` | `Not Started` | `0%` | `AUTH-002`, `DB-001`, `WS-005`, `BKP-001` |
+| `DLC-002` | Portability and DSAR export | `10` | `Not Started` | `0%` | `DLC-001`, `PRJ-001`, `WS-005` |
+| `API-001` | API compatibility and error contract | `11` | `Not Started` | `0%` | `CORE-002`, `AUTH-006`, `SDK-001` |
+| `SEC-003` | Supply-chain integrity and provenance | `11` | `Not Started` | `0%` | `TST-001`, `GIT-006` |
+
+*— End of Canonical Engineering Progress Tracker —*

@@ -35,8 +35,8 @@ export class StaticExporter {
     let totalTokensCompiled = 0;
     if (tokenMap) {
       const cssResult = compileTokenMapToCSS(tokenMap);
-      tokenCss = cssResult.css;
-      totalTokensCompiled = cssResult.metrics.tokenCount;
+      tokenCss = cssResult.cssText;
+      totalTokensCompiled = Object.keys(cssResult.variables).length;
     }
 
     // Base responsive CSS reset and theme defaults
@@ -64,7 +64,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 /* @moolox/deploy Runtime Engine */
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('[Moolox Dios Engine] Hydrated static canvas artifact (`DEP-001`). Nodes: ' + ${totalNodes});
+    console.log('[Moolox Dios Engine] Hydrated static canvas artifact (\\'DEP-001\\'). Nodes: ' + ${totalNodes});
     const buttons = document.querySelectorAll('button[data-action]');
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -130,12 +130,12 @@ ${jsBundle}
     // Build attribute string
     const attrs: string[] = [];
     if (node.nodeId) attrs.push(`id="${this.escapeHTML(node.nodeId)}"`);
-    if (props.className) attrs.push(`class="${this.escapeHTML(props.className)}"`);
-    if (props.href) attrs.push(`href="${this.escapeHTML(props.href)}"`);
-    if (props.src) attrs.push(`src="${this.escapeHTML(props.src)}"`);
-    if (props.alt) attrs.push(`alt="${this.escapeHTML(props.alt)}"`);
-    if (props.role) attrs.push(`role="${this.escapeHTML(props.role)}"`);
-    if (props['aria-label']) attrs.push(`aria-label="${this.escapeHTML(props['aria-label'])}"`);
+    if (props.className) attrs.push(`class="${this.escapeHTML(String(props.className))}"`);
+    if (props.href) attrs.push(`href="${this.escapeHTML(String(props.href))}"`);
+    if (props.src) attrs.push(`src="${this.escapeHTML(String(props.src))}"`);
+    if (props.alt) attrs.push(`alt="${this.escapeHTML(String(props.alt))}"`);
+    if (props.role) attrs.push(`role="${this.escapeHTML(String(props.role))}"`);
+    if (props['aria-label']) attrs.push(`aria-label="${this.escapeHTML(String(props['aria-label']))}"`);
 
     // Inline style rules
     if (Object.keys(styles).length > 0) {
@@ -156,7 +156,7 @@ ${jsBundle}
     // Children & Text Content
     let innerContent = '';
     if (typeof props.content === 'string' && props.content) {
-      innerContent = this.escapeHTML(props.content);
+      innerContent = this.escapeHTML(String(props.content));
     } else if (node.children && node.children.length > 0) {
       innerContent = '\n' + node.children.map((c) => this.compileNodeToHTML(c, onNodeCount)).join('\n') + '\n    ';
     }

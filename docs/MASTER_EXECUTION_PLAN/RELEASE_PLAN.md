@@ -2,6 +2,8 @@
 ## Staged Versioning Roadmap Across 7 Canonical Releases (`v0.5 -> Future`)
 **Document Series:** Master Execution Plan (MEP) — File 6 of 8 | **Status:** Approved Release Schedule | **Deletions:** Zero (0)
 
+> `CANONICAL_RECONCILIATION.md` governs Moolox naming, three-digit IDs, and status. `PRODUCTION_HARDENING_PLAN.md` adds mandatory assurance gates without deleting any release feature.
+
 ---
 
 # STAGED VERSIONING PHILOSOPHY (`PRESERVE VISION, STAGE DELIVERY`)
@@ -53,7 +55,7 @@ timeline
 - **Core Strategic Identity:** The category-defining public launch delivering **90–95% of premium user expectations**. We introduce full **Bidirectional GitHub Monorepo Synchronization (`Code is Truth`)**, the W3C Token Theme Studio, 50 hardcoded brand kits, specialized AI agents (`Layout/UX Specialist`), custom domain SSL routing (`CNAME`), and Pro/Agency billing gates (`$29 / $299 per month`).
 
 ### 1. Assigned Canonical Features Inventory
-- **`@dios/auth` (`1`):** `AUTH-04` (`GitHub OAuth App`).
+- **`@moolox/auth` (`1`):** `AUTH-007` (`GitHub Credential Authorization`).
 - **`@dios/workspace` (`2`):** `WS-04` (`Multi-Workspace Dashboard`), `WS-05` (`Audit Trail`).
 - **`@dios/project` (`1`):** `PRJ-05` (`Template Duplication & Cloning`).
 - **`@dios/canvas` (`2`):** `CNV-05` (`Responsive Grid Splitters`), `CNV-06` (`Virtualized Sub-Tree Windowing`).
@@ -62,7 +64,7 @@ timeline
 - **`@dios/components` (`3`):** `CMP-02` (`50 Brand Presets`), `CMP-03` (`Insertion Drawer`), `CMP-04` (`Prop Customizer`).
 - **`@dios/tokens` (`1`):** `TKN-04` (`Theme Studio & Light/Dark Inverter`).
 - **`@dios/deploy` (`1`):** `DEP-04` (`Custom Domain SSL & DNS CNAME Router`).
-- **`@dios/git` (`4`):** `GIT-01` (`GitHub App Linker`), `GIT-02` (`AST Exporter`), `GIT-03` (`Inngest Pusher`), `GIT-04` (`Incoming Webhook`).
+- **`@moolox/git` (`4`):** `GIT-001` (`GitHub App Linker`), `GIT-002` (`AST Exporter`), `GIT-003` (`Inngest Pusher`), `GIT-004` (`Incoming Webhook`).
 - **`@dios/billing` (`2`):** `BIL-03` (`Pro Quotas $29/mo`), `BIL-04` (`Agency Quotas $299/mo`).
 - **`@dios/analytics` (`1`):** `ANA-02` (`Web Vitals Collector`).
 - **`@dios/enterprise` (`2`):** `ENT-01` (`Enterprise Org Schema Root`), `ENT-02` (`Automated SOC2 Monitor`).
@@ -98,7 +100,7 @@ timeline
 ---
 
 # RELEASE 4: `v2.0 ECOSYSTEM` (MARKETPLACE, PLUGINS & MULTIPLAYER)
-- **Target Release Date:** Month 9 (`Completion of Sprint 9`) | **Total Assigned Features:** `14 Features` (`Cumulative = 94 Features / 83.9%`)
+- **Target Release Date:** After Sprint 9 and mandatory Sprint 7H certification | **Existing Product Scope:** Preserved unchanged
 - **Target User Personas:** Third-party plugin developers, professional UI template creators, enterprise design teams, and full-service web agencies.
 - **Core Strategic Identity:** Transforming DIOS from a standalone application into a thriving multi-sided **Digital Experience Operating System Ecosystem**. We activate our dormant schema tables (`MKT-02`, `PLG-02`) to launch the Creator Component Marketplace (`80/20 Stripe Connect revenue share`), our Zero-DOM Web Worker Plugin Sandbox, real-time `Yjs` CRDT multiplayer collaboration, and bidirectional Figma token synchronization (`TKN-05`).
 
@@ -125,7 +127,7 @@ timeline
 - **Core Strategic Identity:** Institutional security and regulatory hardening (`$30K–$100K+ ACV contracts`). We activate multi-department enterprise organization hierarchies (`ENT-01`), SAML 2.0 Single Sign-On (`Okta / Azure AD`), SCIM 2.0 automated employee provisioning (`ENT-04`), European GDPR data residency shards (`eu-west-1 Dublin`), Customer-Managed Encryption Keys (`AWS KMS CMEK`), and HIPAA compliance modes.
 
 ### 1. Assigned Canonical Features Inventory
-- **`@dios/auth` (`1`):** `AUTH-05` (`SAML 2.0 SSO Enterprise Gateway`).
+- **`@moolox/auth` (`1`):** `AUTH-004` (`SAML 2.0 SSO Enterprise Gateway`).
 - **`@dios/billing` (`1`):** `BIL-06` (`Enterprise Custom Invoicing & PO Gateway`).
 - **`@dios/analytics` (`1`):** `ANA-05` (`Enterprise SIEM Audit Log Export Bridge`).
 - **`@dios/enterprise` (`5`):** `ENT-03` (`GDPR eu-west-1 Shards`), `ENT-04` (`SCIM 2.0 Provisioning`), `ENT-05` (`AWS KMS CMEK`), `ENT-06` (`HIPAA PHI Shield`), `ENT-07` (`Enterprise Admin Console`).
@@ -133,7 +135,8 @@ timeline
 ### 2. Release Exit Gate & Verification Scorecard
 1. **SAML / SCIM Federation Gate:** Okta SAML login authenticates and auto-assigns exact employee department roles; SCIM termination in Okta revokes active DIOS sessions inside `< 1 second`.
 2. **GDPR European Residency Gate:** Workspace flagged with `residency: 'EU'` routes 100% of PostgreSQL queries, AST JSONB storage, and edge publishing strictly within EU data centers (`eu-west-1`).
-3. **CMEK KMS Encryption Gate:** Revoking customer AWS KMS key immediately renders active `project_versions.ast_tree` unreadable to DIOS servers. **EXIT GATE VERDICT: `Enterprise Tier RELEASED.`**
+3. **CMEK KMS Encryption Gate:** Revoking customer AWS KMS key immediately renders active `project_versions.ast_tree` unreadable to Moolox servers.
+4. **Data Lifecycle Gate:** `DLC-001` and `DLC-002` verify retention, legal hold, deletion with backup tombstones, portable DSAR export, and audit receipts. **EXIT GATE VERDICT: `Enterprise Tier RELEASED.`**
 
 ---
 
@@ -152,7 +155,8 @@ timeline
 ### 2. Release Exit Gate & Verification Scorecard
 1. **Headless SDK Gate:** Node.js script calling `await dios.ai.generateTurn(projectId, "Build pricing section")` returns exact mutated `IASTNode` tree and updates DB state in `< 3.5 seconds`.
 2. **CLI Scaffolding Gate:** Running `npx @dios/cli@latest init my-site --project-id=123` scaffolds clean Next.js 15 app locally linked directly to the user's active DIOS workspace.
-3. **CI/CD Action Gate:** GitHub Action (`@dios/action`) inside developer PR blocks merge if token violations or XSS scripts are detected. **EXIT GATE VERDICT: `Platform SDK RELEASED.`**
+3. **CI/CD Action Gate:** GitHub Action (`@moolox/action`) inside developer PR blocks merge if token violations or XSS scripts are detected.
+4. **Contract & Provenance Gate:** `API-001` and `SEC-003` block release on breaking API diffs, unsigned artifacts, missing SBOMs, or unresolved high-severity supply-chain findings. **EXIT GATE VERDICT: `Platform SDK RELEASED.`**
 
 ---
 

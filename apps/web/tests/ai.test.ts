@@ -26,7 +26,7 @@ describe('Floating AI Prompt Command Bar (AI-001)', () => {
       intent: 'ADD_SECTION',
       targetNodeId: 'root-box',
       mutatedTree: { ...sampleTree, children: [{ nodeId: 'child-1', type: 'span', props: { content: 'AI Generated' }, styles: {} }] },
-      patches: [{ type: 'ADD_CHILD', targetId: 'root-box', node: { nodeId: 'child-1', type: 'span', props: { content: 'AI Generated' }, styles: {} } }],
+      patches: [{ action: 'ADD_CHILD', targetNodeId: 'root-box', timestamp: Date.now(), payload: { child: { nodeId: 'child-1', type: 'span', props: { content: 'AI Generated' }, styles: {} } } }],
       qualityGatePassed: true,
       durationMs: 412,
       tokensUsed: 620,
@@ -54,7 +54,7 @@ describe('Live Patch Preview Overlay (AI-005)', () => {
       intent: 'UPDATE_STYLE',
       durationMs: 198,
       tokensUsed: 210,
-      patches: [{ type: 'UPDATE_PROPS', targetId: 'hero-1', props: { className: 'bg-[var(--dios-color-bg-primary)]' } }],
+      patches: [{ action: 'UPDATE_PROPS', targetNodeId: 'hero-1', timestamp: Date.now(), payload: { props: { className: 'bg-[var(--dios-color-bg-primary)]' } } }],
     };
 
     // Trigger confirm

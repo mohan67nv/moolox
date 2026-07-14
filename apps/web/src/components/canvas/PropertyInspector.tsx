@@ -100,10 +100,12 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
     }
 
     setStyleColorInput(resolvedColor);
-    const updatedStyles = {
-      ...(selectedNode.styles || {}),
-      color: resolvedColor || undefined,
-    };
+    const updatedStyles: Record<string, string> = { ...(selectedNode.styles || {}) };
+    if (resolvedColor) {
+      updatedStyles.color = resolvedColor;
+    } else {
+      delete updatedStyles.color;
+    }
     onUpdateNode(selectedNode.nodeId, {
       ...selectedNode,
       styles: updatedStyles,
@@ -112,10 +114,12 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
 
   const handleApplyStylePadding = (newPadding: string) => {
     setStylePaddingInput(newPadding);
-    const updatedStyles = {
-      ...(selectedNode.styles || {}),
-      padding: newPadding || undefined,
-    };
+    const updatedStyles: Record<string, string> = { ...(selectedNode.styles || {}) };
+    if (newPadding) {
+      updatedStyles.padding = newPadding;
+    } else {
+      delete updatedStyles.padding;
+    }
     onUpdateNode(selectedNode.nodeId, {
       ...selectedNode,
       styles: updatedStyles,

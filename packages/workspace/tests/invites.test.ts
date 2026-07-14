@@ -22,7 +22,7 @@ describe('Role-Based Workspace Invite Links & Verification (WS-002)', () => {
       secretKey: secret,
     });
 
-    expect(token).startsWith('invite_');
+    expect(token.startsWith('invite_')).toBe(true);
 
     const payload = verifyWorkspaceInviteToken(token, secret);
     expect(payload.workspaceId).toBe('ws_alpha_1');

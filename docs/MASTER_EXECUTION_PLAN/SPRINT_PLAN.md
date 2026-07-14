@@ -123,7 +123,7 @@ Connect our floating `Cmd+K` prompt drawer to our **3-Agent Atomic AI Loop (`Hai
 # SPRINT 4: FULL 2-WAY GITHUB MONOREPO SYNCHRONIZATION
 - **Assigned Release Bucket:** `v1.0 Public` | **Duration:** Weeks 9–10 (`14 Calendar Days`)
 - **Assigned Pods:** `Platform Pod`, `AST Pod`
-- **Assigned Canonical Features:** `GIT-01` (`GitHub App OAuth`), `GIT-02` (`Clean Code Exporter`), `GIT-03` (`Inngest Pusher`), `GIT-04` (`Incoming Webhook`), `AUTH-04` (`OAuth PAT`), `WS-04` (`Multi-Workspace Dashboard`), `WS-05` (`Audit Trail`) (`7 Features`)
+- **Assigned Canonical Features:** `GIT-001` (`GitHub App OAuth`), `GIT-002` (`Clean Code Exporter`), `GIT-003` (`Inngest Pusher`), `GIT-004` (`Incoming Webhook`), `AUTH-007` (`GitHub Credential Authorization`), `WS-004` (`Multi-Workspace Dashboard`), `WS-005` (`Audit Trail`) (`7 Features`)
 
 ### 1. Executive Objectives & Architectural Focus
 Build our **Bidirectional GitHub Monorepo Synchronization Engine (`Code is Truth`)**. Enable 1-click GitHub App repository linking, clean Next.js 15 App Router code generation (`/src/app/*`), Inngest async atomic git pushing (`feat(dios)`), and incoming webhook pullers (`push -> SWC parse -> canvas AST update in < 3s`).
@@ -132,7 +132,7 @@ Build our **Bidirectional GitHub Monorepo Synchronization Engine (`Code is Truth
 - Completion of `Sprint 3` (`v0.5 Alpha` active baseline, `AST-02` parser/serializer, and `INF-02` Inngest queues).
 
 ### 3. Physical Deliverables & Code Packages Scaffolding
-- `packages/git/src/github/*.ts` — GitHub App OAuth router, repository provisioning API, and encrypted PAT storage.
+- `packages/git/src/github/*.ts` — GitHub App installation router, repository provisioning API, and encrypted credential storage with revocation and key-version hooks.
 - `packages/git/src/sync/*.ts` — AST-to-TSX code exporter, Inngest commit bundler (`pushCommitJob`), and incoming webhook handler (`webhookPushHandler`).
 - `apps/web/src/app/dashboard/page.tsx` — Multi-workspace dashboard matrix and immutable audit trail viewer.
 
@@ -144,6 +144,14 @@ Build our **Bidirectional GitHub Monorepo Synchronization Engine (`Code is Truth
 ### 5. Execution Risks & Testing Strategy
 - **Risk:** GitHub API rate limits during rapid canvas saves. **Mitigation:** Debounce git commits via Inngest durable queue (`GIT-03`); batch edits into 30-second atomic commit windows.
 - **Testing:** Automated integration tests spinning up ephemeral GitHub repositories, executing bidirectional push/pull cycles, and verifying exact file AST hash equality (`100% code parity`).
+
+### 6. Task Order and Quality Gates
+1. **Task 4.1 — `AUTH-007`, `GIT-001`:** GitHub App installation authorization, encrypted credential lifecycle, repository linking, and project-settings UI.
+2. **Task 4.2 — `GIT-002`:** Standalone code exporter.
+3. **Task 4.3 — `GIT-003`:** Durable background push.
+4. **Task 4.4 — `GIT-004`, `WS-004`, `WS-005`:** Incoming synchronization, dashboard, and immutable audit feed.
+
+Each task must pass implementation, tests, type safety, documentation, real lint, performance, security review, and commit gates before the next task begins.
 
 ---
 
@@ -226,6 +234,8 @@ Build our in-canvas `Sandpack / WebContainer` runtime engine (`CNV-07`), allowin
 - **Risk:** Sandpack WebContainer initialization delaying initial canvas mount. **Mitigation:** Lazy-load `SandpackHost` only when user clicks "Live Server Preview" toggle.
 - **Testing:** Load testing `pgvector` index against 100,000 stored prompt vectors, asserting cosine similarity query return times under `20ms`. **EXIT GATE: `v1.5 Polish` CERTIFIED.**
 
+> **Mandatory next workstream:** Execute Sprint 7H immediately after Sprint 7 and before Sprint 8. Its full specification is maintained in the addendum at the end of this file and in `PRODUCTION_HARDENING_PLAN.md`.
+
 ---
 
 # SPRINT 8: CREATOR COMPONENT MARKETPLACE & STRIPE CONNECT BILLING
@@ -237,7 +247,7 @@ Build our in-canvas `Sandpack / WebContainer` runtime engine (`CNV-07`), allowin
 Activate our dormant `marketplace_items` and `seller_accounts` schema tables (`MKT-02`). Build public Creator Storefronts (`dios.app/@creator`), automated Stripe Connect Express payouts (`80% seller / 20% DIOS commission`), star ratings (`MKT-05`), and automated AST security ingestion sandboxes (`MKT-04`). Launch Agency Client Portal (`WS-06`) and asynchronous visual branching (`PRJ-06`).
 
 ### 2. Upstream Dependencies & Prerequisites
-- Completion of `Sprint 7` (`v1.5 Polish` active, `BIL-01` Stripe webhooks, and `AI-04` static linter gates).
+- Completion of `Sprint 7` and certification of mandatory `Sprint 7H` (`v1.5 Polish` active, production recovery/security gates passed, `BIL-01` Stripe webhooks, and `AI-04` static linter gates).
 
 ### 3. Physical Deliverables & Code Packages Scaffolding
 - `packages/marketplace/src/services/*.ts` — Marketplace listing query service, Stripe Connect account onboarding router, and checkout unlock bridge.
@@ -285,7 +295,7 @@ Build our **Zero-DOM Web Worker Plugin Sandbox (`WorkerGlobalScope`)**, allowing
 # SPRINT 10: ENTERPRISE GOVERNANCE, SOC2 & EUROPEAN DATA RESIDENCY
 - **Assigned Release Bucket:** `Enterprise` | **Duration:** Months 10–12 (`60 Calendar Days`)
 - **Assigned Pods:** `Enterprise Pod`, `Platform Pod`
-- **Assigned Canonical Features:** `ENT-03` (`GDPR eu-west-1 Shards`), `ENT-04` (`SCIM 2.0 Provisioning`), `ENT-05` (`AWS KMS CMEK`), `ENT-06` (`HIPAA PHI Shield`), `ENT-07` (`Enterprise Admin Console`), `AUTH-05` (`SAML 2.0 SSO Gateway`), `BIL-06` (`Net-30 PO Gateway`), `ANA-05` (`SIEM Audit Export`) (`8 Features`)
+- **Assigned Canonical Features:** `ENT-003` (`GDPR eu-west-1 Shards`), `ENT-004` (`SCIM 2.0 Provisioning`), `ENT-005` (`AWS KMS CMEK`), `ENT-006` (`HIPAA PHI Shield`), `ENT-007` (`Enterprise Admin Console`), `AUTH-004` (`SAML 2.0 SSO Gateway`), `BIL-006` (`Net-30 PO Gateway`), `ANA-005` (`SIEM Audit Export`), plus `DLC-001..002` (`Data Lifecycle`) (`10 Features`)
 
 ### 1. Executive Objectives & Architectural Focus
 Activate our dormant `enterprise_orgs` hierarchy (`ENT-01`). Build **SAML 2.0 Single Sign-On (`Okta / Azure AD`)** and **SCIM 2.0 automated user provisioning (`ENT-04`)**. Implement European GDPR data residency routing (`eu-west-1 Dublin shards`), Customer-Managed Encryption Keys (`AWS KMS CMEK`), HIPAA compliance PHI shields (`ENT-06`), and automated SIEM audit log streaming (`Datadog / Splunk`). **EXECUTE `ENTERPRISE` TIER LAUNCH.**
@@ -294,12 +304,12 @@ Activate our dormant `enterprise_orgs` hierarchy (`ENT-01`). Build **SAML 2.0 Si
 - Completion of `Sprint 9` (`v2.0 Ecosystem` stable baseline, `AUTH-01` Clerk identity, and `DB-02` RLS middleware).
 
 ### 3. Physical Deliverables & Code Packages Scaffolding
-- `packages/enterprise/src/sso/*.ts` — SAML 2.0 federation router, Clerk SCIM webhook listener, and exact domain auto-provisioner.
+- `packages/enterprise/src/sso/*.ts` — SAML 2.0 federation router (`AUTH-004`), Clerk SCIM webhook listener, and exact domain auto-provisioner.
 - `packages/enterprise/src/security/*.ts` — AWS KMS envelope encryption utility (`CMEK`) and European data residency routing middleware (`eu-west-1 pooler selector`).
 - `apps/web/src/app/enterprise/admin/page.tsx` — Enterprise IT administration console (`/enterprise/admin`), MFA enforcement toggles, and SIEM webhook config.
 
 ### 4. Verifiable Acceptance Criteria (`Definition of Done`)
-1. Enterprise employee logs in via corporate Okta SAML credentials (`employee@acme.com`); automatically assigned to Acme Enterprise Organization and target department workspace with exact `Admin` or `Editor` role (`AUTH-05`).
+1. Enterprise employee logs in via corporate Okta SAML credentials (`employee@acme.com`); automatically assigned to Acme Enterprise Organization and target department workspace with exact `Admin` or `Editor` role (`AUTH-004`).
 2. Employee terminated inside Okta triggers SCIM 2.0 `DELETE` webhook; employee's active DIOS sessions terminate instantly within `< 1 second` (`ENT-04`).
 3. Enterprise workspace configured with `residencyRegion: 'eu-west-1'` verifies 100% of PostgreSQL queries, AST snapshots, and edge KV routes execute strictly within European AWS Dublin and Cloudflare EU data centers (`ENT-03`).
 
@@ -363,4 +373,40 @@ Conquer our long-term **Category Frontiers (`Year 4+ Vision`)**. Launch **Spatia
 
 ---
 
-*— End of File 5 (Canonical Master Sprint Plan — Sprints 0 through 12 over 24 Months) —*
+---
+
+# SPRINT 7H: PRODUCTION ASSURANCE, RECOVERY & GITHUB RELIABILITY GATE
+- **Assigned Release Bucket:** `Production Hardening` | **Duration:** `30 Calendar Days`
+- **Assigned Pods:** `Platform Pod`, `AST Pod`, `Canvas Pod`
+- **Assigned Canonical Features:** `MIG-001`, `BKP-001`, `SEC-001`, `SEC-002`, `GIT-007`, `GIT-008`, `OPS-001`, `TST-001`, `A11Y-001` (`9 Features`)
+
+### 1. Executive Objectives
+Certify the existing architecture for production operation without replacing its stack or module boundaries. Add versioned database migrations, tested PITR restores, credential rotation, GitHub webhook idempotency and drift reconciliation, SLOs, mandatory CI, and WCAG 2.2 AA product-interface gates.
+
+### 2. Dependencies
+- Completion of Sprint 7 and a stable Sprint 4 Git synchronization baseline.
+
+### 3. Exit Gate
+1. Empty and N-1 databases migrate successfully; an isolated PITR restore completes inside the documented RTO.
+2. Duplicate, delayed, missed, and poison GitHub deliveries do not create duplicate commits or lose AST mutations.
+3. Force-push, branch deletion, installation suspension, and repository transfer pause or reconcile safely without silent overwrite.
+4. Build, real lint, typecheck, test, migration, accessibility, and security checks are required before merge.
+5. SLO alerts and incident runbooks pass a game-day exercise.
+
+**Sprint 8 is blocked until Sprint 7H is certified.** Detailed acceptance criteria are defined in `PRODUCTION_HARDENING_PLAN.md`.
+
+---
+
+# SPRINT 10 ASSURANCE ADDENDUM
+
+Add `DLC-001` (retention, deletion, and legal hold) and `DLC-002` (portable DSAR export) to Sprint 10. Enterprise release certification requires verified deletion, backup tombstones, legal-hold behavior, resumable tenant-isolated exports, and audit receipts.
+
+---
+
+# SPRINT 11 ASSURANCE ADDENDUM
+
+Add `API-001` (API compatibility and error contract) and `SEC-003` (software supply-chain integrity and provenance) to Sprint 11. Public API/SDK release is blocked by breaking contract diffs, unsigned artifacts, missing SBOMs, or unresolved high-severity supply-chain findings.
+
+---
+
+*— End of File 5 (Canonical Master Sprint Plan — Sprints 0 through 12 plus mandatory Sprint 7H) —*

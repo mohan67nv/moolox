@@ -1,6 +1,6 @@
 # DOCUMENT 7 — MASTER FEATURE REGISTRY & PROGRESSIVE ARCHITECTURE BLUEPRINT
 ## Part 2: Canonical Feature Inventory — Core Engine, Canvas & Design Systems
-**Document:** 7.2 of 7.6 | **Series:** Master Feature Registry & Staged Delivery Blueprint
+**Document:** 7.2 of 7.7 | **Series:** Master Feature Registry & Staged Delivery Blueprint
 
 ---
 
@@ -80,6 +80,8 @@ We record every planned capability across Pillars 1 through 6 of our overarching
 | **`GIT-003`** | **Automated Git Push & Commit Formatter** | Background Inngest worker bundling code exports and pushing atomic commits (`feat(dios): update hero pricing section [skip ci]`) to user branch. | **CRITICAL** | 6/10 | `GIT-002` | Architecture Defined | **`v1.0 Public`** | `100% (Spec) / 0% (Code)` |
 | **`GIT-004`** | **Incoming GitHub Webhook Bidirectional Puller** | Webhook listener (`push event`) detecting developer code changes pushed from VS Code, running SWC parser, and updating canvas AST in `< 3s`. | **HIGH** | 8/10 | `AST-002`, `GIT-001`| Architecture Defined | **`v1.0 Public`** | `100% (Spec) / 0% (Code)` |
 | **`GIT-005`** | **AST Node ID Last-Write-Wins Conflict Resolver** | Structural collision handler cleanly merging simultaneous canvas edits and Git pushes by locking changes to unique `ASTNodeId` boundaries. | **HIGH** | 7/10 | `GIT-004`, `AST-005`| Architecture Defined | **`v1.5 Polish`** | `100% (Spec) / 0% (Code)` |
+| **`GIT-007`** | **Webhook Delivery Ledger and Idempotent Processing** | Durable unique delivery IDs, HMAC-before-parse verification, duplicate suppression, bounded retries, dead-letter handling, audited replay, and installation/repository lifecycle events. | **CRITICAL** | 7/10 | `GIT-001`, `GIT-003`, `GIT-004`, `INF-002`, `WS-005` | Architecture Defined | **`Production Hardening`** | `100% Spec / 0% Code` |
+| **`GIT-008`** | **Drift Reconciliation and Safe Branch-State Controller** | Reconciles remote commit SHA, exported tree hash, and active AST version; safely handles missed webhooks, force pushes, protected/deleted branches, repository transfer, and default-branch changes. | **CRITICAL** | 8/10 | `GIT-005`, `GIT-007` | Architecture Defined | **`Production Hardening`** | `100% Spec / 0% Code` |
 
 ---
 

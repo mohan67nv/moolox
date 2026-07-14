@@ -9,7 +9,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { type IASTNode, type IW3CTokenMap } from '@moolox/types';
-import { execute3AgentLoop, type AgentResult, type AIIntentCategory } from '@moolox/ai';
+import { execute3AgentLoop, type AgentResult } from '@moolox/ai';
 
 export interface PromptBarProps {
   /** Active AST sub-tree canvas (`IASTNode`) */
@@ -119,9 +119,10 @@ export const PromptBar: React.FC<PromptBarProps> = ({
           setLastError(errorTxt);
           setStageMessage('❌ Quality Gate blocked proposal due to structural/Zero-Hex violations.');
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         setCurrentStage('ERROR');
-        setLastError(err?.message || 'Unexpected failure inside 3-Agent Core Loop.');
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        setLastError(errorMessage || 'Unexpected failure inside 3-Agent Core Loop.');
         setStageMessage('❌ Orchestrator encountered a fatal error.');
       }
     },

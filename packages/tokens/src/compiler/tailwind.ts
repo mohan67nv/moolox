@@ -42,8 +42,11 @@ export function flattenTokenMap(
 
     const currentPath = prefix ? `${prefix}.${key}` : key;
 
-    if ('value' in item && 'type' in item && typeof (item as TokenValue).value === 'string') {
-      out[currentPath] = item as TokenValue;
+    const rawValue = (item as any).value ?? (item as any).$value;
+    const rawType = (item as any).type ?? (item as any).$type ?? 'string';
+
+    if (rawValue !== undefined && typeof rawValue === 'string') {
+      out[currentPath] = { value: rawValue, type: rawType };
     } else {
       flattenTokenMap(item as ITokenGroup, currentPath, out);
     }

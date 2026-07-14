@@ -58,6 +58,16 @@ This ledger tracks the exact completion status, feature IDs, and git commits acr
 
 ---
 
-## 🚀 Sprint 4 — Plugin SDK, Component Marketplace & External Integrations (`v1.0 Beta` Foundation)
-- **Status**: 🔄 **READY TO START**
-- **Sprint Objectives**: Implement `@moolox/sdk` (`IASTPlugin` API contract), Sandbox runtime execution engine (`PLG-001`), Component Marketplace manifest parser (`MKT-001`), Versioned Marketplace Registry (`MKT-002`), and Enterprise SAML 2.0 / OIDC single sign-on flows (`ENT-001`).
+## 🏁 Sprint 4 — Bidirectional GitHub Monorepo Synchronization & AST Schema Hardening (`v1.0 Public` Foundation)
+- **Status**: ✅ **COMPLETED & APPROVED (`v1.0 PUBLIC GATE CERTIFIED`)** 🏆
+- **Canonical Authority**: `MASTER_EXECUTION_PLAN/CANONICAL_RECONCILIATION.md`, `IMPLEMENTATION_ORDER.md`, and `SPRINT_PLAN.md`.
+- **Sprint Objectives**: Implement GitHub App installation authorization and encrypted credential lifecycle (`AUTH-007`), repository provisioner/linker (`GIT-001`), standalone Next.js exporter (`GIT-002`), durable background push (`GIT-003`), incoming webhook pull (`GIT-004`), multi-workspace dashboard (`WS-004`), and immutable activity feed (`WS-005`). Enforce strict `node-{uuid}` schema integrity across all AI orchestration generators (`SonnetGenerator`, `HaikuRouter`) (`ORC-001..004`).
+- **Completed Tasks & Commit Registry**:
+  | Task | Package | Feature IDs | Git Commit | Key Deliverables |
+  | :--- | :--- | :--- | :--- | :--- |
+  | **Task 4.1** | `@moolox/auth`<br>`@moolox/git` | `AUTH-007`<br>`GIT-001` | `Pending Commit` | GitHub installation token authorization, encrypted PAT credentials store (`git_credentials`), repository linker, GitHub App webhook verification (`verifyGitHubWebhookSignature`). |
+  | **Task 4.2** | `@moolox/git`<br>`@moolox/tokens` | `GIT-002`<br>`TKN-002` | `Pending Commit` | Standalone Next.js 15 repository exporter (`compileTokensToStandaloneCSS`), cleanly prefixing all custom properties with `--dios-` and handling both W3C (`$value`/`$type`) and legacy (`value`/`type`) token structures. |
+  | **Task 4.3** | `@moolox/git` | `GIT-003` | `Pending Commit` | Background Git push queue and durable Inngest event dispatcher (`git.commit.push`), commit batching, and branch protection checks. |
+  | **Task 4.4** | `@moolox/git`<br>`@moolox/workspace` | `GIT-004`<br>`WS-004`, `WS-005` | `Pending Commit` | Incoming webhook pull synchronizer (`git.commit.pull`), multi-workspace dashboard matrix (`getWorkspaceDashboardStats`), immutable HMAC audit ledger (`logAuditEvent`), and 100% test suite & typecheck clean pass across all 20 monorepo workspaces. |
+- **Preserved Deferred Scope**: The former plugin/marketplace/enterprise proposal is not deleted: `PLG-001` remains Sprint 7; `MKT-001..005` remain Sprint 8; `PLG-002..004` remain Sprint 9; enterprise SSO remains `AUTH-004` in Sprint 10.
+- **Git Branch**: `dev`

@@ -8,6 +8,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
+import { getTableName } from 'drizzle-orm';
 import * as schema from '../src/schema';
 
 describe('Drizzle ORM Relational Schema (DB-001)', () => {
@@ -37,9 +38,6 @@ describe('Drizzle ORM Relational Schema (DB-001)', () => {
   });
 
   it('configures table names exactly according to SQL specifications', () => {
-    const getTableName = (table: unknown): string => {
-      return (table as { _: { name: string } })._.name;
-    };
 
     expect(getTableName(schema.workspaces)).toBe('workspaces');
     expect(getTableName(schema.users)).toBe('users');

@@ -19,6 +19,7 @@ export type PermissionAction =
   | 'MANAGE_BILLING'
   | 'MANAGE_MEMBERS'
   | 'MANAGE_SETTINGS'
+  | 'MANAGE_PROJECT'
   | 'CREATE_PROJECT'
   | 'EDIT_AST'
   | 'PUBLISH_DEPLOYMENT'
@@ -46,6 +47,7 @@ const ROLE_PERMISSIONS: Record<WorkspaceRole, ReadonlySet<PermissionAction>> = {
     'MANAGE_BILLING',
     'MANAGE_MEMBERS',
     'MANAGE_SETTINGS',
+    'MANAGE_PROJECT',
     'CREATE_PROJECT',
     'EDIT_AST',
     'PUBLISH_DEPLOYMENT',
@@ -55,12 +57,14 @@ const ROLE_PERMISSIONS: Record<WorkspaceRole, ReadonlySet<PermissionAction>> = {
     'MANAGE_BILLING',
     'MANAGE_MEMBERS',
     'MANAGE_SETTINGS',
+    'MANAGE_PROJECT',
     'CREATE_PROJECT',
     'EDIT_AST',
     'PUBLISH_DEPLOYMENT',
     'VIEW_PROJECT',
   ]),
   editor: new Set([
+    'MANAGE_PROJECT',
     'CREATE_PROJECT',
     'EDIT_AST',
     'PUBLISH_DEPLOYMENT',

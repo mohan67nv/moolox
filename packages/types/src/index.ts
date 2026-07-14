@@ -75,3 +75,33 @@ export type {
   ViewportMode,
   DeploymentStatus,
 } from './domain';
+
+// ---------------------------------------------------------------------------
+// Git Integration Types (Feature: AUTH-007, GIT-001..004)
+// ---------------------------------------------------------------------------
+export {
+  GitHubInstallationStatusSchema,
+  GitHubInstallationSchema,
+  CredentialKeyVersionSchema,
+  EncryptedCredentialSchema,
+  RepositoryLinkSchema,
+  SyncDirectionSchema,
+  SyncStatusSchema,
+  SyncEventSchema,
+  CodeExportManifestSchema,
+  GitHubPushPayloadSchema,
+  GitHubAccessTokenResponseSchema,
+} from './git';
+
+export type {
+  GitHubInstallationStatus,
+  IGitHubInstallation,
+  IEncryptedCredential,
+  IRepositoryLink,
+  SyncDirection,
+  SyncStatus,
+  ISyncEvent,
+  ICodeExportManifest,
+  IGitHubPushPayload,
+  IGitHubAccessTokenResponse,
+} from './git';

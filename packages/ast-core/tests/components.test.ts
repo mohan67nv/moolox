@@ -30,10 +30,11 @@ describe('11 Built-In Core Component Specifications (CMP-001)', () => {
 
   it('Every single component spec generates a valid canonical IASTNode tree matching Zod schema', () => {
     for (const spec of CORE_COMPONENTS_REGISTRY) {
-      const nodeTree = spec.createNode(`${spec.id}-test-instance`);
+      const testId = `node-${spec.id}-test-instance`;
+      const nodeTree = spec.createNode(testId);
 
       // Verify node ID assignment
-      expect(nodeTree.nodeId).toBe(`${spec.id}-test-instance`);
+      expect(nodeTree.nodeId).toBe(testId);
       expect(nodeTree.type).toBeDefined();
 
       // Validate strict compliance with ASTNodeSchema

@@ -21,7 +21,8 @@ export class SonnetGenerator implements IAgentExecutor {
     const startTime = Date.now();
     const prompt = context.userPrompt.trim();
     const intent: AIIntentCategory = (context.metadata?.intent as AIIntentCategory) || 'UPDATE_STYLE';
-    const targetNodeId = context.targetNodeId || (context.astTree ? context.astTree.nodeId : 'root');
+    const rawTargetId = context.targetNodeId || (context.astTree ? context.astTree.nodeId : 'node-root');
+    const targetNodeId = rawTargetId.startsWith('node-') ? rawTargetId : `node-${rawTargetId}`;
     const tokenMap = context.activeTokens;
 
     let mutatedTree: IASTNode | null = context.astTree ? JSON.parse(JSON.stringify(context.astTree)) : null;
@@ -49,7 +50,7 @@ export class SonnetGenerator implements IAgentExecutor {
 
     // Mutate existing tree based on classified intent and user prompt
     if (intent === 'ADD_SECTION') {
-      const newSectionNode = this.generateNewSectionNode(`gen-${Date.now().toString(36)}`, prompt, tokenMap);
+      const newSectionNode = this.generateNewSectionNode(`node-gen-${Date.now().toString(36)}`, prompt, tokenMap);
       if (tokenMap) {
         sanitizeNodeTokens(newSectionNode, tokenMap);
       }
@@ -145,6 +146,7 @@ export class SonnetGenerator implements IAgentExecutor {
   }
 
   private generateNewSectionNode(id: string, prompt: string, tokenMap?: IW3CTokenMap): IASTNode {
+    const s = id.startsWith('node-') ? id : `node-${id}`;
     const lower = prompt.toLowerCase();
     let sectionTitle = 'New Feature Section';
     if (lower.includes('pricing')) sectionTitle = 'Transparent Pricing Matrix';
@@ -153,49 +155,50 @@ export class SonnetGenerator implements IAgentExecutor {
     if (lower.includes('contact')) sectionTitle = 'Get in Touch';
 
     return {
-      nodeId: id,
+      nodeId: s,
       type: 'section',
       props: { className: 'py-20 px-8 bg-[var(--dios-color-bg-secondary)] text-[var(--dios-color-fg-primary)]' },
       styles: {},
       children: [
         {
-          nodeId: `${id}-heading`,
+          nodeId: `${s}-heading`,
           type: 'h2',
           props: { className: 'text-3xl font-extrabold text-center mb-8' },
           styles: {},
-          children: [{ nodeId: `${id}-heading-txt`, type: 'span', props: { content: sectionTitle }, styles: {} }],
+          children: [{ nodeId: `${s}-heading-txt`, type: 'span', props: { content: sectionTitle }, styles: {} }],
         },
         {
-          nodeId: `${id}-body`,
+          nodeId: `${s}-body`,
           type: 'p',
           props: { className: 'text-center max-w-2xl mx-auto text-[var(--dios-color-fg-secondary)]' },
           styles: {},
-          children: [{ nodeId: `${id}-body-txt`, type: 'span', props: { content: `Dynamically generated section answering requirement: "${prompt}".` }, styles: {} }],
+          children: [{ nodeId: `${s}-body-txt`, type: 'span', props: { content: `Dynamically generated section answering requirement: "${prompt}".` }, styles: {} }],
         },
       ],
     };
   }
 
   private createDefaultHeroTree(id: string, prompt: string): IASTNode {
+    const s = id.startsWith('node-') ? id : `node-${id}`;
     return {
-      nodeId: id,
+      nodeId: s,
       type: 'section',
       props: { className: 'py-24 px-8 text-center bg-[var(--dios-color-bg-primary)] text-[var(--dios-color-fg-primary)]' },
       styles: {},
       children: [
         {
-          nodeId: `${id}-h1`,
+          nodeId: `${s}-h1`,
           type: 'h1',
           props: { className: 'text-5xl font-black mb-6 tracking-tight' },
           styles: {},
-          children: [{ nodeId: `${id}-h1-txt`, type: 'span', props: { content: 'Dynamic Digital Experience Studio' }, styles: {} }],
+          children: [{ nodeId: `${s}-h1-txt`, type: 'span', props: { content: 'Dynamic Digital Experience Studio' }, styles: {} }],
         },
         {
-          nodeId: `${id}-sub`,
+          nodeId: `${s}-sub`,
           type: 'p',
           props: { className: 'text-xl max-w-3xl mx-auto mb-10 text-[var(--dios-color-fg-secondary)]' },
           styles: {},
-          children: [{ nodeId: `${id}-sub-txt`, type: 'span', props: { content: `Prompt: ${prompt}` }, styles: {} }],
+          children: [{ nodeId: `${s}-sub-txt`, type: 'span', props: { content: `Prompt: ${prompt}` }, styles: {} }],
         },
       ],
     };
@@ -203,7 +206,9 @@ export class SonnetGenerator implements IAgentExecutor {
 
   private findNodeMut(node: IASTNode, targetId: string): IASTNode | null {
     if (!node) return null;
-    if (node.nodeId === targetId) return node;
+    const cleanTarget = targetId.startsWith('node-') ? targetId : `node-${targetId}`;
+    const cleanNode = node.nodeId?.startsWith('node-') ? node.nodeId : `node-${node.nodeId}`;
+    if (node.nodeId === targetId || cleanNode === cleanTarget) return node;
     if (node.children) {
       for (const child of node.children) {
         const found = this.findNodeMut(child, targetId);

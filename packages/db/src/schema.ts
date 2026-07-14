@@ -61,6 +61,7 @@ export const workspaces = pgTable('workspaces', {
     { onDelete: 'set null' },
   ),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const users = pgTable('users', {
@@ -83,6 +84,7 @@ export const workspaceMembers = pgTable(
       .references(() => users.id, { onDelete: 'cascade' }),
     /** owner, admin, editor, viewer, client_editor */
     role: varchar('role', { length: 32 }).notNull().default('editor'),
+    joinedAt: timestamp('joined_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => ({
     pk: primaryKey({ columns: [t.workspaceId, t.userId] }),
@@ -173,7 +175,86 @@ export const subscriptions = pgTable('subscriptions', {
 });
 
 // ============================================================================
-// 3. ECOSYSTEM & MARKETPLACE DOMAIN (PRESERVED FOR v2.0 ACTIVATION)
+// 3. GITHUB INTEGRATION DOMAIN (ACTIVE IN v1.0 — Sprint 4)
+// Feature IDs: AUTH-007, GIT-001, GIT-003, GIT-004
+// ============================================================================
+
+export const githubInstallations = pgTable('github_installations', {
+  id: varchar('id', { length: 32 }).primaryKey(),
+  workspaceId: varchar('workspace_id', { length: 32 })
+    .notNull()
+    .references(() => workspaces.id, { onDelete: 'cascade' }),
+  /** GitHub's numeric installation ID from the App installation event */
+  githubInstallationId: integer('github_installation_id').notNull().unique(),
+  /** GitHub account login that installed the App (org or user) */
+  githubAccountLogin: varchar('github_account_login', { length: 255 }).notNull(),
+  /** GitHub account type: 'Organization' or 'User' */
+  githubAccountType: varchar('github_account_type', { length: 32 }).notNull(),
+  /** GitHub account numeric ID */
+  githubAccountId: integer('github_account_id').notNull(),
+  /** Installation lifecycle status */
+  status: varchar('status', { length: 32 }).notNull().default('active'),
+  /** Granted permissions (e.g., { contents: 'write', metadata: 'read' }) */
+  permissions: jsonb('permissions').$type<Record<string, string>>().notNull().default({}),
+  /** Repository selection type: 'all' or 'selected' */
+  repositorySelection: varchar('repository_selection', { length: 32 }).notNull().default('selected'),
+  installedAt: timestamp('installed_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+/**
+ * AES-256-GCM encrypted GitHub installation access tokens.
+ * The `keyVersion` column enables transparent credential rotation
+ * without downtime, as specified by the SEC-002 hook.
+ */
+export const githubCredentials = pgTable('github_credentials', {
+  installationId: varchar('installation_id', { length: 32 })
+    .primaryKey()
+    .references(() => githubInstallations.id, { onDelete: 'cascade' }),
+  /** AES-256-GCM encrypted access token (base64 ciphertext) */
+  encryptedToken: text('encrypted_token').notNull(),
+  /** AES-256-GCM initialization vector (base64) */
+  iv: varchar('iv', { length: 64 }).notNull(),
+  /** AES-256-GCM authentication tag (base64) */
+  authTag: varchar('auth_tag', { length: 64 }).notNull(),
+  /** Encryption key version for rotation lifecycle (SEC-002 hook) */
+  keyVersion: smallint('key_version').notNull().default(1),
+  /** Expiry timestamp of the underlying GitHub installation token */
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+/**
+ * Append-only ledger of bidirectional sync events between Moolox
+ * canvas and linked GitHub repositories (GIT-003, GIT-004).
+ */
+export const syncEvents = pgTable('sync_events', {
+  id: varchar('id', { length: 32 }).primaryKey(),
+  projectId: varchar('project_id', { length: 32 })
+    .notNull()
+    .references(() => projects.id, { onDelete: 'cascade' }),
+  /** 'push' (canvas→GitHub) or 'pull' (GitHub→canvas) */
+  direction: varchar('direction', { length: 8 }).notNull(),
+  /** queued, in_progress, completed, failed, conflict */
+  status: varchar('status', { length: 32 }).notNull().default('queued'),
+  /** Git commit SHA after push completes or pull processes */
+  commitSha: varchar('commit_sha', { length: 64 }),
+  /** Commit message */
+  commitMessage: text('commit_message'),
+  /** Number of files changed */
+  filesChanged: integer('files_changed').notNull().default(0),
+  /** Duration of the sync operation in milliseconds */
+  durationMs: integer('duration_ms'),
+  /** Error message if sync failed */
+  errorMessage: text('error_message'),
+  /** Actor (user ID) who triggered the sync */
+  triggeredBy: varchar('triggered_by', { length: 32 })
+    .notNull()
+    .references(() => users.id, { onDelete: 'restrict' }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+// ============================================================================
+// 4. ECOSYSTEM & MARKETPLACE DOMAIN (PRESERVED FOR v2.0 ACTIVATION)
 // ============================================================================
 
 export const sellerAccounts = pgTable('seller_accounts', {
@@ -324,6 +405,7 @@ export const projectsRelations = relations(projects, ({ one, many }) => ({
   aiSessions: many(aiSessions),
   deployments: many(deployments),
   comments: many(canvasComments),
+  syncEvents: many(syncEvents),
 }));
 
 export const projectVersionsRelations = relations(projectVersions, ({ one, many }) => ({
@@ -412,6 +494,35 @@ export const canvasCommentsRelations = relations(canvasComments, ({ one }) => ({
   }),
 }));
 
+export const githubInstallationsRelations = relations(githubInstallations, ({ one, many }) => ({
+  workspace: one(workspaces, {
+    fields: [githubInstallations.workspaceId],
+    references: [workspaces.id],
+  }),
+  credential: one(githubCredentials, {
+    fields: [githubInstallations.id],
+    references: [githubCredentials.installationId],
+  }),
+}));
+
+export const githubCredentialsRelations = relations(githubCredentials, ({ one }) => ({
+  installation: one(githubInstallations, {
+    fields: [githubCredentials.installationId],
+    references: [githubInstallations.id],
+  }),
+}));
+
+export const syncEventsRelations = relations(syncEvents, ({ one }) => ({
+  project: one(projects, {
+    fields: [syncEvents.projectId],
+    references: [projects.id],
+  }),
+  triggeredByUser: one(users, {
+    fields: [syncEvents.triggeredBy],
+    references: [users.id],
+  }),
+}));
+
 export const auditLogsRelations = relations(auditLogs, ({ one }) => ({
   workspace: one(workspaces, {
     fields: [auditLogs.workspaceId],
@@ -471,3 +582,12 @@ export type NewCanvasComment = typeof canvasComments.$inferInsert;
 
 export type AuditLog = typeof auditLogs.$inferSelect;
 export type NewAuditLog = typeof auditLogs.$inferInsert;
+
+export type GitHubInstallation = typeof githubInstallations.$inferSelect;
+export type NewGitHubInstallation = typeof githubInstallations.$inferInsert;
+
+export type GitHubCredential = typeof githubCredentials.$inferSelect;
+export type NewGitHubCredential = typeof githubCredentials.$inferInsert;
+
+export type SyncEvent = typeof syncEvents.$inferSelect;
+export type NewSyncEvent = typeof syncEvents.$inferInsert;

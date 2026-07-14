@@ -79,7 +79,7 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
           : undefined;
 
       // Clean props and filter out special internal keys before passing to DOM
-      const { content: _, className, ...restProps } = node.props || {};
+      const { content: _content, className, ...restProps } = node.props || {};
 
       let combinedClassName = typeof className === 'string' ? className : '';
 
@@ -94,7 +94,7 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
         combinedClassName += ' outline outline-1 outline-dashed outline-purple-500/60';
       }
 
-      const elementProps: Record<string, any> = {
+      const elementProps: Record<string, unknown> = {
         ...restProps,
         'data-node-id': node.nodeId,
         'data-selected': isSelected ? 'true' : undefined,

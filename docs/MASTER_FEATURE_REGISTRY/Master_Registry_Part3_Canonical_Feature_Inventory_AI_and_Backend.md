@@ -1,6 +1,6 @@
 # DOCUMENT 7 — MASTER FEATURE REGISTRY & PROGRESSIVE ARCHITECTURE BLUEPRINT
 ## Part 3: Canonical Feature Inventory — AI Abstractions, Backend Core & Storage
-**Document:** 7.3 of 7.6 | **Series:** Master Feature Registry & Staged Delivery Blueprint
+**Document:** 7.3 of 7.7 | **Series:** Master Feature Registry & Staged Delivery Blueprint
 
 ---
 
@@ -83,7 +83,8 @@ We continue our canonical inventory across Pillars 7 through 12. In accordance w
 | **`AUTH-001`** | **Clerk Enterprise Identity & JWKS Verification** | Core auth gateway (`Clerk Middleware`) verifying JWT signatures at edge (`< 1ms`) and populating `sub` and `email` claims on request context. | **CRITICAL** | 4/10 | None (Base Core) | Architecture Defined | **`v0.5 Alpha`** | `100% (Spec) / 0% (Code)` |
 | **`AUTH-002`** | **Workspace Role-Based Access Control (`RBAC`) Engine** | Granular permission check matrix (`Owner`, `Admin`, `Editor`, `Viewer`) verified against `workspace_members` table on every protected API route. | **CRITICAL** | 5/10 | `AUTH-001`, `DB-001`| Architecture Defined | **`v0.5 Alpha`** | `100% (Spec) / 0% (Code)` |
 | **`AUTH-003`** | **Metered AI Credit Billing Gate (`Stripe Webhooks`)** | Real-time credit pool auditor (`1 credit = $0.01`) deducting credits per Sonnet/Vision prompt and triggering hard circuit breaker when balance hits `0`. | **CRITICAL** | 6/10 | `AUTH-001`, `INF-001`| Architecture Defined | **`v0.5 Alpha`** | `100% (Spec) / 0% (Code)` |
-| **`AUTH-004`** | **Enterprise SAML / Single Sign-On (`SSO`) Bridge** | Clerk Enterprise SSO integration enabling Okta, Azure AD, and Google Workspace federated authentication for enterprise accounts. | **HIGH** | 6/10 | `AUTH-001` | Architecture Defined | **`v3.0 Enterprise`**| `100% (Spec) / 0% (Code)` |
+| **`AUTH-004`** | **Enterprise SAML / Single Sign-On (`SSO`) Bridge** | Clerk Enterprise SSO integration enabling Okta, Azure AD, and Google Workspace federated authentication for enterprise accounts. This ID is reserved for enterprise SSO and must never be reused for GitHub authorization. | **HIGH** | 6/10 | `AUTH-001` | Preserved Hook | **`Enterprise`**| `100% Spec / partial hook code` |
+| **`AUTH-007`** | **GitHub App Credential Authorization Bridge** | GitHub App installation authorization with least-privilege repository scopes, versioned envelope-encrypted credentials, revocation/suspension handling, and secret redaction. | **CRITICAL** | 7/10 | `AUTH-001` | Architecture Defined | **`v1.0 Public`** | `100% Spec / 0% Code` |
 
 ---
 
