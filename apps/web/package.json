@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@moolox/ast-core": "workspace:*",
+    "@moolox/ai": "workspace:*",
+    "@moolox/tokens": "workspace:*",
     "@moolox/types": "workspace:*",
     "next": "^15.3.0",
     "react": "^19.1.0",
