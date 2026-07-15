@@ -30,6 +30,7 @@ export interface ThemeSwitcherProps {
   activeBrandKitId: string;
   onChangeColorMode: (mode: ColorMode) => void;
   onChangeBrandKit: (presetId: string) => void;
+  onOpenStudio?: () => void;
 }
 
 export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
@@ -37,6 +38,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   activeBrandKitId,
   onChangeColorMode,
   onChangeBrandKit,
+  onOpenStudio,
 }) => {
   return (
     <div className="flex items-center gap-4 bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-gray-300">
@@ -83,6 +85,16 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
             </option>
           ))}
         </select>
+        {onOpenStudio && (
+          <button
+            type="button"
+            onClick={onOpenStudio}
+            className="ml-1 px-2.5 py-1 bg-purple-600/80 hover:bg-purple-600 text-white font-semibold rounded transition flex items-center gap-1 shadow-sm text-[11px]"
+          >
+            <span>🎨</span>
+            <span>Studio</span>
+          </button>
+        )}
       </div>
     </div>
   );

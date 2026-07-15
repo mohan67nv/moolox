@@ -37,6 +37,22 @@ To ensure zero divergence between our foundational strategic research and our ph
 
 # 10. SUCCESS CRITERIA VERIFICATION SCORECARD
 
+## Final pre-GA traceability overlay
+
+| Strategy requirement | Canonical IDs | Physical areas | Release evidence |
+|:---|:---|:---|:---|
+| Existing repository onboarding | `GIT-009` | `packages/git`, `packages/ast-core`, `apps/web` | Accepted compatibility report over real repo |
+| Safe/unsafe editability | `AST-011` | AST analysis, Canvas guards, AI scope | Read-only mutation tests |
+| Transactional save | `PRJ-008` | project, DB, web API/store | save/reload/conflict/cross-tenant journey |
+| Minimal semantic change | `CHG-001` | AST, Git, Project, Audit | zero unrelated mutation metric |
+| Designer-readable PR | `REV-001` | Git, Canvas, preview UI | source+visual review and exact merge reconciliation |
+| Privacy-safe analytics/memory | `PRV-001` | Auth, Analytics, AI | consent/withdrawal/redaction/memory deletion tests |
+| Canonical billing/economics | `BIL-007` | Billing, Analytics | signed lifecycle and gross-margin scenario |
+| Round-trip/golden journeys | `TST-002` | root CI + apps/web + core packages | ≥100 real-repo cycles and failure taxonomy |
+| Paid demand | `VAL-001` | Product/founder evidence | 5–10 partners, ≥3 paid, ≥90% supported PR merge-without-repair |
+
+Implementation status is governed by `CANONICAL_RECONCILIATION.md` and the completion ledger. Historical “0% code,” “100% readiness,” old workspace paths, and pre-implementation statements below are retained only as historical text.
+
 We test our progressive implementation model against the four mandatory executive verification questions defined in our project direction change:
 
 ## 1. What has been completed?

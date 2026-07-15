@@ -72,7 +72,33 @@ timeline
 ### 2. Release Exit Gate & Verification Scorecard
 1. **Git Synchronization Gate:** 2-Way Git sync verified across 100 simultaneous VS Code + Canvas edit sessions without data loss or breaking React syntax (`100% code parity`).
 2. **Financial Conversion Gate:** Free-to-Pro upgrade checkout (`$29/mo`) and custom domain provisioning verify in `< 60 seconds` end-to-end.
-3. **Enterprise & Scalability Gate:** 100+ page enterprise site (`500 nodes`) renders inside canvas cleanly with `< 150MB` heap memory; Drata confirms zero failing SOC2 controls. **EXIT GATE VERDICT: `v1.0 Public LAUNCHED GLOBALLY.`**
+3. **Historical Enterprise & Scalability Target:** 100+ page enterprise site (`500 nodes`) renders inside canvas with `< 150MB` heap memory and continuous controls report no failures. **This historical target is superseded and does not certify or launch `v1.0`.**
+
+> **FINAL GA OVERLAY:** The historical release definition above is preserved only for traceability. It does not certify release and “90–95% of vision” is not a GA measure.
+
+## Binding `v1.0` identity — constrained trustworthy repository GA
+
+**Customer promise:** Connect or create a supported Next.js site, understand what is safe to change, make a bounded visual or conversational change, receive a minimal verified pull request, review it visually or in code, and deploy without surrendering ownership.
+
+### Binding pre-GA inventory
+
+- Sprint 4 recorded Git foundation: `AUTH-007`, `GIT-001..004`, `WS-004..005`, subject to integration revalidation.
+- Sprint 5: `PRJ-008`, `GIT-009`, `AST-011`, `CHG-001`, `TKN-004`, `CMP-003..004`, `CNV-005`.
+- Sprint 6: `GIT-005`, `AI-006`, `REV-001`, `DEP-004`, `BIL-003`, `ANA-002`, `PRV-001`, `BIL-007`, `TST-002`, `VAL-001` plus initial certification of the P0 assurance features.
+
+### Binding GA scorecard
+
+1. **Integration:** No mock/in-memory implementation exists on certified signup, persistence, Git, AI, billing, analytics, or deploy paths.
+2. **Repository safety:** Compatibility report accepted before editing; read-only regions cannot be changed through UI or AI.
+3. **Round-trip:** At least 100 cycles across at least 10 real repositories; supported semantic hashes match; unrelated mutation is zero.
+4. **PR trust:** At least 90% of supported pilot PRs merge without manual code repair and include source plus visual evidence.
+5. **Recovery/reliability:** Save/reload, optimistic conflicts, empty/N-1 migrations, PITR restore, webhook replay/drift, credential rotation, and rollback pass.
+6. **Security/privacy/accessibility:** Cross-tenant suite passes; zero unresolved critical/high findings; analytics/learning require consent; core journeys meet WCAG 2.2 AA.
+7. **Economics:** One approved pricing/credit model and workload gross-margin floor pass.
+8. **Market evidence:** 5–10 qualified partners use real repositories and at least three pay.
+9. **Release honesty:** Supported envelope, limitations, failure corpus, support ownership, and evidence are published internally before authorization.
+
+The release is not global or certified until all gates pass.
 
 ---
 

@@ -1,8 +1,10 @@
 # CANONICAL MASTER FEATURE REGISTRY
-## Historical 112-Feature Product Inventory plus 13-Feature Production-Assurance Addendum
+## Historical 112-Feature Product Inventory plus 13 Assurance and 9 Final Pre-GA Trust Features
 **Document Series:** Master Execution Plan (MEP) — File 2 of 8 | **Status:** Canonical Inventory | **Duplicates Merged:** 100%
 
 > **Reconciled operation:** Use the three-digit IDs and semantic rules in `CANONICAL_RECONCILIATION.md`. This file's two-digit IDs are historical planning aliases only. Sprints 0–3 status rows are superseded by `docs/SPRINT_COMPLETION_LEDGER.md`. Legacy DIOS and `@dios/*` references mean Moolox and `@moolox/*` and must not be copied into new implementation.
+
+> **Final inventory overlay (2026-07-15):** The canonical inventory is 134 features: 112 historical product features, 13 production-assurance features, and 9 final pre-GA trust/validation features. Existing module tables below remain preserved; the new definitions and sprint reassignments in the addendum at the end of this file are binding.
 
 ---
 
@@ -244,3 +246,31 @@ Every atomic feature across the entire 24-month vision of **Antigravity (DIOS)**
 ---
 
 *— End of File 2 (Canonical Master Feature Registry — 112 Features Deduplicated across 16 Modules) —*
+
+---
+
+# FINAL PRE-GA TRUST & VALIDATION ADDENDUM — 9 FEATURES
+
+| Feature ID | Feature Name & Detailed Description | Source | Biz / Eng Value | Dependencies | Complexity | Status & Sprint | Module mapping | Owner & Definition of Done |
+|:---|:---|:---|:---:|:---|:---:|:---:|:---|:---|
+| **`PRJ-008`** | **Production Project Persistence and Save Transaction:** Authenticated, type-safe transaction persisting AST, tokens, active version, and optimistic version atomically. | `Moolox_2031.md` §12; `KNOWN_GAP.md` | CRITICAL / CRITICAL | `PRJ-001..004`, `CORE-002`, `AUTH-002`, `DB-001` | **M** | Not Started / **Sprint 5** | Projects + Core + DB | **Platform Pod** — stale save returns `409`; cross-tenant access fails; refresh restores exact committed hash; Playwright create→edit→save→reload passes. |
+| **`GIT-009`** | **Brownfield Repository Onboarding and Compatibility Report:** Read-only analysis of a linked existing Next.js repository, identifying supported files/components, unsupported constructs, parse failures, dependencies, framework risk, tokens, and remediation. | `Moolox_2031.md` §§7,12,20 | CRITICAL / CRITICAL | `AUTH-007`, `GIT-001..004`, `AST-002`, `TKN-001` | **L** | Not Started / **Sprint 5** | Git + AST + Web | **AST Pod** — analysis never mutates the repository; editing remains disabled until explicit report acceptance; report is versioned and reproducible. |
+| **`AST-011`** | **Safe Editability and Confidence Map:** Enforced classification of repository regions as `editable`, `review-required`, or `read-only`, including reasons and confidence. | `Moolox_2031.md` §§7,10,12 | CRITICAL / CRITICAL | `GIT-009`, `AST-002..003`, `AIS-003`, `CNV-001..004` | **L** | Not Started / **Sprint 5** | AST + Canvas + AI | **AST Pod** — canvas and AI enforce classifications; unsupported regions cannot be silently rewritten or included in patches. |
+| **`CHG-001`** | **Semantic Change Object and Minimal-Diff Contract:** Immutable aggregate linking intent, base SHA/version, semantic IDs, AST patch, source diff, checks, actor, review, deployment, and outcome references. | `Moolox_2031.md` §§7,11,12 | CRITICAL / CRITICAL | `AST-003`, `AST-011`, `GIT-002..004`, `PRJ-008`, `WS-005` | **L** | Not Started / **Sprint 5** | Existing Project/AST/Git/Analytics contracts; no new module | **AST Pod** — unrelated file/node mutation count is zero; unchanged structures remain stable; every state transition is audited. |
+| **`REV-001`** | **Designer-Readable Visual Pull-Request Review:** Dedicated branch/PR containing source diff, semantic summary, responsive before/after, checks, risk, and approve/reject workflow. | `Moolox_2031.md` §§7,10,12 | CRITICAL / HIGH | `CHG-001`, `GIT-003..005`, `CNV-003`, `DEP-002..003` | **L** | Not Started / **Sprint 6** | Git + Canvas + Web | **Canvas Pod** — rejection leaves target branch unchanged; merge SHA reconciles exactly to active project; unsafe conflicts pause. |
+| **`PRV-001`** | **Analytics, AI-Memory, and Learning Consent Controls:** Explicit purpose/retention consent, withdrawal, memory inspection/deletion, and telemetry redaction. | `Moolox_2031.md` §§12,17 | CRITICAL / CRITICAL | `AUTH-002`, `ANA-001`, `WS-005` | **M** | Not Started / **Sprint 6** | Auth + Analytics + AI | **Platform Pod** — analytics/learning off by default until consent; withdrawal stops new collection; source, prompts, secrets, and raw assets never enter ordinary telemetry. |
+| **`BIL-007`** | **Canonical Pricing, Billing Lifecycle, and AI-Economics Gate:** One approved pricing/credit model, complete signed Stripe lifecycle, idempotent entitlements, and workload gross-margin guardrails. | `Moolox_2031.md` §§12,24 | CRITICAL / HIGH | `BIL-001..003`, `AUTH-003`, `ANA-001` | **M** | Not Started / **Sprint 6** | Billing + Analytics | **Platform Pod** — checkout, invoice, proration, retry, cancellation, refund, and entitlement reconciliation pass; approved workloads stay above the agreed gross-margin floor. |
+| **`TST-002`** | **Repository Round-Trip Corpus and GA Golden-Journey Certification:** Publicly reproducible proof across real repositories and complete user journeys. | `Moolox_2031.md` §§12,15,23 | CRITICAL / CRITICAL | `TST-001`, `GIT-009`, `AST-011`, `CHG-001`, `REV-001`, `PRJ-008` | **L** | Not Started / **Sprint 6** | Cross-cutting Test Assurance | **Quality Pod** — at least 10 non-demo repos × 10 cycles; supported semantic hashes preserved; unrelated diffs zero; failures categorized; signup→live and repo→safe PR journeys pass. |
+| **`VAL-001`** | **Paid Design-Partner and Willingness-to-Pay Release Gate:** Evidence-based operating gate for qualified real-repository usage and payment. | `Moolox_2031.md` §§12,15,22,23 | CRITICAL / HIGH | `GIT-009`, `REV-001`, `BIL-007`, `TST-002` | **M** | Not Started / **Sprint 6** | Product/Founder operating workstream | **Founder/Product** — 5–10 qualified partners, at least 3 paid, ≥90% merge-without-manual-repair for supported changes, measured first-safe-PR time, and explicit GA decision. |
+
+## Binding sprint reassignments
+
+| Feature | Canonical sprint |
+|:---|:---:|
+| `TKN-004`, `CMP-003..004`, `CNV-005` | `5` |
+| `GIT-005`, `AI-006`, `DEP-004`, `BIL-003`, `ANA-002` | `6` |
+| `AI-005`, `AI-007`, `CNV-006` | `7` |
+| `CMP-002`, `PRJ-005`, `BIL-004` | `8` |
+| `ENT-001..002` | `10` |
+
+Initial certification of `MIG-001`, `BKP-001`, `SEC-001..002`, `GIT-007..008`, `OPS-001`, `TST-001`, and `A11Y-001` occurs in Sprint 6; Sprint 7H recertifies and expands them.

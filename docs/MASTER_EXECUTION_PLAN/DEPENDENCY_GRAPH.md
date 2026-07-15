@@ -119,6 +119,31 @@ The following table establishes the exact upstream unblocking prerequisite chain
 | **`DLC-002`** | Portability & DSAR Export | `DLC-001`, `PRJ-001`, `WS-005` | Complete tenant export depends on lifecycle rules, project data ownership, and audited authorization. |
 | **`API-001`** | API Compatibility Contract | `CORE-002`, `AUTH-006`, `SDK-001` | A public compatibility contract depends on the internal router, scoped credentials, and public API surface. |
 | **`SEC-003`** | Supply-Chain Integrity & Provenance | `TST-001`, `GIT-006` | Signed, scanned releases require the production CI gate and customer-facing GitHub action packaging pipeline. |
+| **`PRJ-008`** | Production Save Transaction | `PRJ-001..004`, `CORE-002`, `AUTH-002`, `DB-001` | A trustworthy repository workflow requires durable, atomic, tenant-safe persistence rather than an injectable client-only save contract. |
+| **`GIT-009`** | Brownfield Repository Compatibility Report | `AUTH-007`, `GIT-001..004`, `AST-002`, `TKN-001` | Existing-repository editing cannot start until the linked codebase is analyzed without mutation and its supported envelope is known. |
+| **`AST-011`** | Editability & Confidence Map | `GIT-009`, `AST-002..003`, `AIS-003`, `CNV-001..004` | Safe AI/canvas mutation requires explicit enforceable boundaries derived from compatibility analysis. |
+| **`CHG-001`** | Semantic Change Object | `AST-003`, `AST-011`, `GIT-002..004`, `PRJ-008`, `WS-005` | Minimal reviewable changes require persisted state, enforced scope, source export/sync, and audit evidence. |
+| **`REV-001`** | Visual Pull-Request Review | `CHG-001`, `GIT-003..005`, `CNV-003`, `DEP-002..003` | A review object depends on a semantic change, safe structural merge, responsive rendering, preview, and rollback. |
+| **`PRV-001`** | Consent & AI-Memory Controls | `AUTH-002`, `ANA-001`, `WS-005` | Analytics and learning require tenant authority, auditable consent, and redacted telemetry. `PRV-001` blocks `ANA-002` activation. |
+| **`BIL-007`** | Billing Lifecycle & Economics | `BIL-001..003`, `AUTH-003`, `ANA-001` | Paid GA requires one canonical model, signed lifecycle events, idempotent entitlements, and measured AI economics. |
+| **`TST-002`** | Round-Trip Corpus & Golden Journeys | `TST-001`, `GIT-009`, `AST-011`, `CHG-001`, `REV-001`, `PRJ-008` | GA proof requires production CI plus the complete repository/change/review/persistence chain. |
+| **`VAL-001`** | Paid Design-Partner Gate | `GIT-009`, `REV-001`, `BIL-007`, `TST-002` | Public release requires demonstrated real-repository value, trust, and willingness to pay. |
+
+## Final pre-GA critical path
+
+```mermaid
+graph LR
+    P[PRJ-008 Persistence] --> O[GIT-009 Onboarding]
+    O --> E[AST-011 Editability Map]
+    E --> C[CHG-001 Semantic Change]
+    C --> R[REV-001 Visual PR]
+    R --> T[TST-002 Corpus & Journeys]
+    B[BIL-007 Economics] --> V[VAL-001 Paid Gate]
+    X[PRV-001 Consent] --> A[ANA-002 Analytics]
+    T --> V
+    H[Production Assurance] --> V
+    V --> GA[v1.0 Constrained GA]
+```
 
 ---
 

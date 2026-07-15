@@ -8,9 +8,10 @@
  * Copyright © 2026 Moolox. All Rights Reserved.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { type IASTNode, type IW3CTokenMap } from '@moolox/types';
 import { enforceTokenResolution } from '@moolox/tokens';
+import { parseResponsiveGridClasses, generateResponsiveGridClass } from '@moolox/canvas';
 
 export interface PropertyInspectorProps {
   /** The selected AST node (`IASTNode`) or `null` if no node is selected */
@@ -60,6 +61,13 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
       setStyleColorInput('');
       setStylePaddingInput('');
     }
+  }, [selectedNode]);
+
+  const activeGridCols = useMemo(() => {
+    if (!selectedNode || typeof selectedNode.props.className !== 'string') {
+      return { mobile: 1, tablet: 2, desktop: 4 };
+    }
+    return parseResponsiveGridClasses(selectedNode.props.className);
   }, [selectedNode]);
 
   if (!selectedNode) {
@@ -126,6 +134,20 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
     });
   };
 
+  const handleApplyGridColumns = (breakpoint: 'mobile' | 'tablet' | 'desktop', span: number) => {
+    const currentCls = typeof selectedNode.props.className === 'string' ? selectedNode.props.className : '';
+    const parsed = parseResponsiveGridClasses(currentCls);
+    parsed[breakpoint] = span;
+    const newCls = generateResponsiveGridClass(parsed);
+    onUpdateNode(selectedNode.nodeId, {
+      ...selectedNode,
+      props: {
+        ...selectedNode.props,
+        className: newCls,
+      },
+    });
+  };
+
   return (
     <aside
       className="w-80 h-full bg-gray-900 border-l border-gray-800 flex flex-col overflow-y-auto text-gray-200 text-xs"
@@ -149,13 +171,13 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
           <label htmlFor="inspector-content" className="block font-semibold text-gray-300 text-[11px] uppercase tracking-wider">
             Text Content
           </label>
-          <input
+          <textarea
             id="inspector-content"
-            type="text"
+            rows={3}
             value={contentInput}
             onChange={(e) => handleApplyContent(e.target.value)}
-            placeholder="Enter element text content..."
-            className="w-full bg-gray-950 border border-gray-800 rounded-md p-2 text-xs text-white focus:outline-none focus:border-blue-500 transition"
+            placeholder="Text or markdown content inside this element..."
+            className="w-full bg-gray-950 border border-gray-800 rounded-md p-2 text-xs text-white font-mono focus:outline-none focus:border-blue-500 transition"
           />
         </div>
 
@@ -217,6 +239,47 @@ export const PropertyInspector: React.FC<PropertyInspectorProps> = ({
               className="w-full bg-gray-950 border border-gray-800 rounded-md p-2 text-xs text-white font-mono focus:outline-none focus:border-blue-500 transition"
             />
           </div>
+        </div>
+
+        {/* Section 4: Responsive Grid Layout (CNV-005) */}
+        <div className="space-y-3 pt-2 border-t border-gray-800/80">
+          <div className="flex items-center justify-between">
+            <h4 className="font-semibold text-gray-300 text-[11px] uppercase tracking-wider">
+              Responsive Grid Spans
+            </h4>
+            <span className="text-[10px] text-cyan-400 font-mono">CNV-005</span>
+          </div>
+          <p className="text-[11px] text-gray-400 leading-relaxed">
+            Adjust column spans across breakpoints (`1..12 cols`). Syncs with interactive Column Splitters.
+          </p>
+
+          {(['mobile', 'tablet', 'desktop'] as const).map((bp) => {
+            const currentVal = activeGridCols[bp];
+            return (
+              <div key={bp} className="bg-gray-950/60 p-2.5 rounded-lg border border-gray-800 space-y-1.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="capitalize font-medium text-gray-300">{bp}</span>
+                  <span className="font-mono text-blue-400 font-bold">{currentVal} cols</span>
+                </div>
+                <div className="grid grid-cols-6 gap-1">
+                  {[1, 2, 3, 4, 6, 12].map((span) => (
+                    <button
+                      key={span}
+                      type="button"
+                      onClick={() => handleApplyGridColumns(bp, span)}
+                      className={`py-1 rounded text-[10px] font-mono font-semibold border transition ${
+                        currentVal === span
+                          ? 'bg-blue-600 border-blue-500 text-white shadow-sm shadow-blue-500/20'
+                          : 'bg-gray-900 border-gray-800 text-gray-400 hover:text-white hover:border-gray-700'
+                      }`}
+                    >
+                      {span}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

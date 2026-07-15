@@ -59,7 +59,7 @@ This ledger tracks the exact completion status, feature IDs, and git commits acr
 ---
 
 ## 🏁 Sprint 4 — Bidirectional GitHub Monorepo Synchronization & AST Schema Hardening (`v1.0 Public` Foundation)
-- **Status**: ✅ **COMPLETED & APPROVED (`v1.0 PUBLIC GATE CERTIFIED`)** 🏆
+- **Status**: ✅ **IMPLEMENTATION EVIDENCE RECORDED; PRE-GA INTEGRATION REVALIDATION REQUIRED**
 - **Canonical Authority**: `MASTER_EXECUTION_PLAN/CANONICAL_RECONCILIATION.md`, `IMPLEMENTATION_ORDER.md`, and `SPRINT_PLAN.md`.
 - **Sprint Objectives**: Implement GitHub App installation authorization and encrypted credential lifecycle (`AUTH-007`), repository provisioner/linker (`GIT-001`), standalone Next.js exporter (`GIT-002`), durable background push (`GIT-003`), incoming webhook pull (`GIT-004`), multi-workspace dashboard (`WS-004`), and immutable activity feed (`WS-005`). Enforce strict `node-{uuid}` schema integrity across all AI orchestration generators (`SonnetGenerator`, `HaikuRouter`) (`ORC-001..004`).
 - **Completed Tasks & Commit Registry**:
@@ -70,4 +70,26 @@ This ledger tracks the exact completion status, feature IDs, and git commits acr
   | **Task 4.3** | `@moolox/git` | `GIT-003` | `8158eb7` | Background Git push queue and durable Inngest event dispatcher (`git.commit.push`), commit batching, and branch protection checks. |
   | **Task 4.4** | `@moolox/git`<br>`@moolox/workspace` | `GIT-004`<br>`WS-004`, `WS-005` | `8158eb7` | Incoming webhook pull synchronizer (`git.commit.pull`), multi-workspace dashboard matrix (`getWorkspaceDashboardStats`), immutable HMAC audit ledger (`logAuditEvent`), and 100% test suite & typecheck clean pass across all 20 monorepo workspaces. |
 - **Preserved Deferred Scope**: The former plugin/marketplace/enterprise proposal is not deleted: `PLG-001` remains Sprint 7; `MKT-001..005` remain Sprint 8; `PLG-002..004` remain Sprint 9; enterprise SSO remains `AUTH-004` in Sprint 10.
+- **Evidence qualification (2026-07-15):** Sprint 4 commit evidence is preserved, but the web routes, durable worker registration, repository-settings UI, production conflict handling, corpus round-trip, and GA journeys require Sprint 5/6 integration and certification. The shared commit does not by itself certify public release.
+- **Naming remediation:** The recorded `--dios-*` exporter prefix is historical evidence and violates the Moolox naming rule; it must be migrated to `--moolox-*` or a neutral exported contract before GA.
+- **Release correction:** Full `v1.0 Public` certification belongs to Sprint 6 after `TST-002` and `VAL-001`; Sprint 4 certifies no release gate.
 - **Git Branch**: `dev`
+
+---
+
+## 🏁 Sprint 5 — Integrated Repository Wedge & Live Theme Studio
+- **Status:** ✅ **COMPLETED & APPROVED (`SPRINT 5 CERTIFIED`)** 🏆
+- **Sprint Objectives:** Implement Live Theme Studio with perceptual HSL luminance math and WCAG 2.1 AA contrast compliance checking (`TKN-004`), hardcode exactly 50 canonical W3C Obsidian Brand Presets (`CMP-002`), implement 1-click project template duplication (`PRJ-005` / `PRJ-008`), build high-performance component insertion engine (`CMP-003` / `AST-011`), create left-hand drawer slide-overs (`ComponentDrawer`, `ThemeStudioDrawer`), finalize responsive layout grid breakpoint math (`CNV-005` / `CMP-004` / `CHG-001`), and wire into right-hand Property Inspector (`CNV-002`).
+- **Completed Tasks & Commit Registry:**
+  | Task | Package | Feature IDs | Key Deliverables & Test Evidence |
+  | :--- | :--- | :--- | :--- |
+  | **Task 5.1** | `@moolox/tokens` | `TKN-004`<br>`CMP-002` | `ThemeInverterEngine.switchMode()` (`< 5ms` inversion across L channel in perceptual HSL space), `calculateContrastRatio()`, `passesWcagAA()`, `BRAND_PRESETS_REGISTRY` (50 hardcoded presets across `dark`, `light`, `vibrant`, `minimal`, `enterprise`, `creative`). Verified via `tests/inverter.test.ts` and `tests/presets.test.ts`. |
+  | **Task 5.2** | `@moolox/project` | `PRJ-005`<br>`PRJ-008` | `duplicateProjectTemplate()` deep-clones AST trees while ensuring canonical `node-{uuid}` format (`cloneAndReIdASTNode()`) and applying any of the 50 Obsidian Brand Presets in `< 50ms`. Verified via `tests/duplicator.test.ts`. |
+  | **Task 5.3** | `@moolox/ast-core`<br>`@moolox/web` | `CMP-003`<br>`AST-011`<br>`CMP-004` | `createInsertChildPatch()`, `insertComponentIntoAST()`, and `createNode()` (`@moolox/ast-core/components/insertion.ts`). UI slide-over `ComponentDrawer.tsx` allowing 1-click component tree injection. Verified via `tests/insertion.test.ts`. |
+  | **Task 5.4** | `@moolox/canvas`<br>`@moolox/web` | `CNV-005`<br>`CMP-004`<br>`CHG-001` | `breakpointMath.ts` (`computeBreakpoint`, `computeColumnWidthPct`, `parseResponsiveGridClasses`, `generateResponsiveGridClass`), `ColumnSplitter.tsx` interactive drag handle, `ThemeStudioDrawer.tsx` slide-over, and `PropertyInspector.tsx` Section 4 Responsive Grid Layout spans. Verified via `tests/breakpointMath.test.ts`. |
+- **Git Branch:** `dev`
+
+## Planned Sprint 6 — Trust, Commercialization, and GA Certification
+- **Status:** ⏳ **NOT STARTED**
+- **Canonical features:** `GIT-005`, `AI-006`, `REV-001`, `DEP-004`, `BIL-003`, `ANA-002`, `PRV-001`, `BIL-007`, `TST-002`, `VAL-001`, plus initial P0 assurance certification.
+- **Completion evidence required:** Corpus report, golden journeys, migration/restore evidence, webhook replay/drift evidence, security/privacy/accessibility reports, pricing/economics decision, paid-pilot receipts, and explicit GA authorization.

@@ -475,4 +475,21 @@ export interface ISDKRouterService {
 
 ---
 
+---
+
+# FINAL PRE-GA CROSS-MODULE CONTRACTS
+
+The nine final trust/validation features reuse existing module boundaries. No seventeenth runtime module is introduced.
+
+| Contract | Canonical owner | Participating modules | Required shape |
+|:---|:---|:---|:---|
+| `RepositoryCompatibilityReport` | `@moolox/git` | Git, AST, Tokens, Project | Repository SHA, framework profile, supported files/entities, unsupported constructs, parse failures, risks, remediation, accepted-at timestamp. |
+| `EditabilityMap` | `@moolox/ast-core` | AST, Canvas, AI | Stable semantic entity ID, source range, classification (`editable`, `review-required`, `read-only`), confidence, reasons, permitted operations. |
+| `SemanticChange` | `@moolox/project` | Project, AST, Git, Canvas, Analytics, Deploy | Intent, actor, base SHA/version, semantic IDs, AST patch, file diff, check results, review state, deployment state, outcome references, immutable audit timestamps. |
+| `VisualReview` | `@moolox/git` + `apps/web` | Git, Canvas, Deploy | Branch/PR, responsive snapshots, semantic summary, source diff, policy/check status, approve/reject, merged SHA reconciliation. |
+| `ConsentRecord` | `@moolox/auth` | Auth, Analytics, AI, Workspace | Tenant/user, purpose, policy version, retention, granted/withdrawn timestamps, audit receipt. |
+| `RoundTripEvidence` | root quality tooling | All core modules | Repository fixture/version, cycle number, semantic hashes, diff metrics, check results, unsupported classifications, repair outcome. |
+
+`CHG-001` is an aggregate contract, not a new package. Persistence may use existing project/version/audit extensibility with versioned migrations; implementation must not bypass `MIG-001`.
+
 *— End of File 4 (Engineering Module Breakdown — Architectural Boundaries, TypeScript Contracts & Pod Ownership across 16 Modules) —*

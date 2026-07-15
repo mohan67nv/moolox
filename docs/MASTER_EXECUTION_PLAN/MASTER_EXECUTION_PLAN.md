@@ -1,6 +1,6 @@
 # MASTER EXECUTION PLAN (MEP)
 ## The Canonical Source of Truth & Executive Engineering Blueprint for Moolox
-**Document Series:** Master Execution Plan (MEP) | **Status:** Active Implementation | **Completed Baseline:** Sprints 0–3
+**Document Series:** Master Execution Plan (MEP) | **Status:** Final Pre-GA Plan | **Recorded Implementation Baseline:** Sprints 0–4
 
 > **Canonical overlay:** `CANONICAL_RECONCILIATION.md` governs naming, three-digit Feature IDs, semantic collisions, and implementation status. Legacy DIOS and `@dios/*` references in this historical blueprint mean Moolox and `@moolox/*`; they must not be introduced into new implementation.
 
@@ -20,14 +20,14 @@ This document serves as the **Supreme Executive Source of Truth** for our entire
 
 | Metric Category | Executive Audit Value | Principal Engineering Context & Scope |
 |:---|:---:|:---|
-| **Total Canonical Features Cataloged** | **125 Atomic Features** | Historical product inventory (`112`) plus production-assurance addendum (`13`), with zero feature loss. |
+| **Total Canonical Features Cataloged** | **134 Atomic Features** | Historical product inventory (`112`) plus production assurance (`13`) plus final pre-GA trust/validation (`9`), with zero feature loss. |
 | **Total Engineering Modules** | **16 Strict Modules** | `Authentication`, `Workspace`, `Projects`, `Canvas`, `AST`, `AI`, `Components`, `Design Tokens`, `Deployment`, `Git`, `Marketplace`, `Billing`, `Analytics`, `Enterprise`, `Plugins`, `SDK`. |
 | **Total Release Buckets** | **7 Staged Releases** | `v0.5 Alpha`, `v1.0 Public`, `v1.5`, `v2.0`, `Enterprise`, `Platform`, `Future`. |
 | **Total Engineering Sprints Planned** | **13 Complete Sprints (`Sprint 0–12`)** | Spanning 24 months of high-velocity, staged engineering execution (`2-week to 4-week sprint cadences`). |
 | **Estimated Critical Path to `v0.5 Alpha`** | **60 Calendar Days (`Sprints 0–3`)** | Core AST Engine, React 19 Canvas, Design Token Compiler, 3-Agent AI Loop, and Edge KV Publisher. |
-| **Estimated Critical Path to `v1.0 Public`** | **120 Calendar Days (`Sprints 4–6`)** | Full 2-Way GitHub Monorepo Sync, 11 Core Components, 50 Brand Kits, and Theme Studio (`90–95% of premium product`). |
+| **Estimated Critical Path to `v1.0 Public`** | **Gate-driven (`Sprints 4–6`)** | Real repository onboarding, editability boundaries, minimal semantic changes, visual PR review, production assurance, and paid-customer proof. Calendar completion cannot certify GA. |
 | **Implementation Readiness Score** | **Active, gated delivery** | Sprint-level readiness is determined by dependency and quality gates; Sprint 7H addresses identified production-assurance work. |
-| **Current Physical Code Completion** | **Sprints 0–3 completed; Sprint 4 approved** | Exact feature and commit evidence is maintained in `docs/SPRINT_COMPLETION_LEDGER.md`. |
+| **Current Physical Code Completion** | **Sprints 0–4 implementation evidence recorded; Sprint 5 next** | Evidence does not imply integrated alpha or GA. Exact states and commits are maintained in `docs/SPRINT_COMPLETION_LEDGER.md`. |
 
 ---
 
@@ -139,6 +139,17 @@ We sequence our 112 canonical features across a high-velocity **13-Sprint (24-Mo
 | **Sprint 11** | **Headless API Platform & Developer SDK (`@dios/sdk`)** | Months 13–18 (`120 Days`)| `SDK-01..03`, `AUTH-06`, `GIT-06`, `MKT-06`, `PLG-05`| Launch public `@dios/sdk` npm package; provide headless API REST/tRPC access for programmatic site generation; release CLI toolchain (`dios init / deploy`). **EXIT GATE: `Platform` RELEASED.** |
 | **Sprint 12** | **Future Frontiers: WebXR 3D Canvas & Autonomous Watchdog**| Months 19–24 (`180 Days`)| `SDK-04..07`, `PRJ-07`, `CNV-09..10`, `AST-08..09`, `AI-10..11`, `ENT-08` | Launch Spatial Computing / WebXR 3D canvas rendering (`Three.js / React Three Fiber`); activate autonomous multi-agent background site self-healing loops (`Watchdog`). **EXIT GATE: `Future` FRONTIERS ACHIEVED.** |
 
+## Final pre-GA sprint overlay
+
+The historical matrix remains for long-term traceability. These rows are binding for remaining pre-GA work:
+
+| Sprint | Canonical scope | Assigned IDs | Exit identity |
+|:---:|:---|:---|:---|
+| **5** | Integrated Repository Wedge | `PRJ-008`, `GIT-009`, `AST-011`, `CHG-001`, `TKN-004`, `CMP-003..004`, `CNV-005` | Real repo → accepted compatibility/editability report → bounded persisted change → minimal buildable diff. |
+| **6** | Trust, Commercialization & GA Certification | `GIT-005`, `AI-006`, `REV-001`, `DEP-004`, `BIL-003`, `ANA-002`, `PRV-001`, `BIL-007`, `TST-002`, `VAL-001`, initial P0 assurance | Visual PR → exact merge reconciliation → production certification → corpus proof → paid partner gate → explicit GA authorization. |
+
+Reassignments: `AI-005`, `AI-007`, `CNV-006` → Sprint 7; `CMP-002`, `PRJ-005`, `BIL-004` → Sprint 8; `ENT-001..002` → Sprint 10. `GIT-005` moves from Sprint 7 to Sprint 6. No feature is deleted.
+
 ---
 
 # ESTIMATED TIMELINE & CRITICAL PATH ORDER
@@ -199,7 +210,7 @@ gantt
 
 # MISSING DEPENDENCIES & IMPLEMENTATION READINESS SCORE
 
-## 1. Missing Dependencies Audit: **ZERO (0) MISSING DEPENDENCIES**
+## 1. Missing Dependencies Audit: **FINAL PRE-GA GAPS NOW CANONICALLY ASSIGNED**
 All required technical and architectural inputs across Documents 1 through 7 have been exhaustively reconciled:
 - **Architectural Abstractions:** `100% Complete`. All 112 features possess clear domain module boundaries (`@dios/*`).
 - **Database Schema & ORM Contracts:** `100% Complete`. Our Drizzle ORM 100%-Extensible Schema (`20+ tables`) is fully specified with exact `JSONB` GIN indexing and RLS `SET LOCAL` middleware patterns.
@@ -212,7 +223,7 @@ All required technical and architectural inputs across Documents 1 through 7 hav
   - [x] Neon / Supabase PostgreSQL 16 Connection Poolers (`@dios/db`)
   - [x] Anthropic (`Claude 3.7 Sonnet / 3.5 Haiku`) & OpenAI (`GPT-4o`) API Keys (`@dios/ai`)
 
-## 2. Quantitative Implementation Readiness Score
+## 2. Evidence-Based Implementation Readiness
 
 ```mermaid
 radialChart
@@ -235,13 +246,13 @@ radialChart
 
 # FINAL EXECUTIVE RECOMMENDATION & KICK-OFF VERDICT
 
-### Is the project ready for implementation?
-## **YES. THE PROJECT IS 100% READY FOR IMPLEMENTATION.**
+### Is the project ready for continued implementation?
+## **YES—UNDER THE FINAL SPRINT 5/6 GATES. IT IS NOT YET READY FOR GA.**
 
 Every single strategic, technical, architectural, financial, and operational requirement from all seven institutional project bibles has been successfully converted into an executable engineering plan. No further conceptual research or architectural pruning is required or recommended.
 
-### Identify the exact first sprint and task to begin:
-## **BEGIN SPRINT 0 (DAY 1) IMMEDIATELY UPON EXECUTIVE AUTHORIZATION.**
+### Identify the exact next sprint and task:
+## **BEGIN SPRINT 5, TASK 5.1: INTEGRATED APPLICATION FOUNDATION AND `PRJ-008` PERSISTENCE.**
 
 ```mermaid
 graph LR

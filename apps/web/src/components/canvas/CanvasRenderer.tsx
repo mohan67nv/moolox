@@ -80,6 +80,7 @@ export const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 
       // Clean props and filter out special internal keys before passing to DOM
       const { content: _content, className, ...restProps } = node.props || {};
+      void _content;
 
       let combinedClassName = typeof className === 'string' ? className : '';
 

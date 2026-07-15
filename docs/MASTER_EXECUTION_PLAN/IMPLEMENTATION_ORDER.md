@@ -86,12 +86,30 @@ graph LR
 - **Day 83–88 (`Task 5.3 - Canvas Pod`):** Build left-hand component insertion slide-over drawer (`CMP-03`), right-hand prop customizer dropdowns (`CMP-04`), and interactive breakpoint grid column splitters (`CNV-05`).
 - **Sprint 5 Unblocking Gate:** Clicking any of the 50 brand preset thumbnails recompiles `tokens.json` and updates canvas in `< 50ms`; dragging column splitters updates Tailwind grid classes cleanly.
 
+> **FINAL PRE-GA REPLACEMENT:** The historical sequence above is retained only for traceability. Execute the following binding order:
+
+### Sprint 5 (`Days 75–88`): Integrated Repository Wedge
+- **Task 5.1:** Integrate auth/workspace/project/canvas/API paths and complete `PRJ-008` transactional persistence. No in-memory substitute is allowed on the certified journey.
+- **Task 5.2:** Implement `GIT-009` compatibility analysis, then `AST-011` editability/confidence enforcement. Editing is blocked until report acceptance.
+- **Task 5.3:** Integrate `TKN-004`, `CMP-003..004`, and `CNV-005` against persisted state and safe regions.
+- **Task 5.4:** Implement `CHG-001` only after Tasks 5.1–5.3 pass; enforce zero unrelated mutation.
+- **Sprint 5 gate:** Real supported repository → accepted report → bounded edit → save/reload → minimal buildable diff.
+
 ### Sprint 6 (`Days 89–120`): Orchestration Expansion, Billing Gates & `v1.0 Public` Launch
 - **Day 89–95 (`Task 6.1 - AI Pod [CRITICAL PATH]`):** Activate specialized AI orchestration agents (`AI-07`): `LayoutSpecialistAgent`, `UXSpecialistAgent`, and `ReviewerLoopAgent` (`AI-06`). Mount `AI-05` multi-modal Vision image-to-code converter inside `Cmd+K` bar (`Claude 3.7 Vision`).
 - **Day 96–104 (`Task 6.2 - Canvas Pod & AST Pod`):** Build virtualized sub-tree lazy windowing (`CNV-06`) and `ASTNodeId` structural conflict resolver (`AST-06`). Verify 100+ page enterprise sites (`500 nodes`) render inside canvas consuming `< 150MB` heap memory.
 - **Day 105–112 (`Task 6.3 - Platform Pod [PARALLEL]`):** Build Cloudflare Custom Hostname API bridge for automated CNAME SSL provisioning (`DEP-04`). Connect Stripe Pro (`$29/mo`) and Agency (`$299/mo`) subscription gating checkouts (`BIL-03`, `BIL-04`).
 - **Day 113–120 (`Task 6.4 - Platform Pod & Enterprise Pod`):** Mount core web vitals script collector (`ANA-02`) across published sites. Activate dormant `enterprise_orgs` root table (`ENT-01`) and connect Drata continuous SOC2 Type II monitoring checks (`ENT-02`).
 - **`v1.0 Public` Release Exit Gate (`Day 120`):** Execute 1,000-user concurrent public readiness penetration and load test. Verify 2-Way Git sync, instant Stripe Pro checkout unlock, and zero failing SOC2 security controls. **CERTIFIED AND LAUNCHED GLOBALLY (`90–95% OF VISION DELIVERED`).**
+
+> **FINAL PRE-GA REPLACEMENT:** The historical launch assertion above is void. Execute this binding order:
+
+### Sprint 6 (`Gate-Driven`): Trust, Commercialization, and GA Certification
+- **Task 6.1:** Pull `GIT-005` forward; complete `AI-006`; implement `REV-001` branch/PR, visual review, conflict pause, and merge reconciliation.
+- **Task 6.2:** Complete `DEP-004`, `BIL-003`, `PRV-001`, `BIL-007`, and consent-gated `ANA-002`.
+- **Task 6.3:** Initial production certification of `MIG-001`, `BKP-001`, `SEC-001..002`, `GIT-007..008`, `OPS-001`, `TST-001`, and `A11Y-001`.
+- **Task 6.4:** Execute `TST-002` repository corpus/golden journeys and `VAL-001` paid design-partner gate.
+- **GA gate:** All Sprint 6 acceptance criteria in `SPRINT_PLAN.md` pass. No calendar date, traffic simulation, or feature count substitutes for evidence.
 
 ---
 
@@ -106,6 +124,13 @@ graph LR
 | **Sprint 10 (`Enterprise`)**<br/>*(Months 10–12 / 60 Days)* | **Enterprise Pod:** `ENT-003` (GDPR eu-west-1), `ENT-004` (SCIM 2.0)<br/>`ENT-005` (AWS KMS CMEK), `ENT-006` (HIPAA Shield), `DLC-001..002` (Data Lifecycle)<br/>**Platform Pod:** `AUTH-004` (SAML 2.0 SSO) | Activates `enterprise_orgs` hierarchy. Mounts Okta/Azure AD SAML SSO and SCIM provisioning. Enforces European residency, customer-key encryption, verified deletion/legal holds, and portable exports. |
 | **Sprint 11 (`Platform SDK`)**<br/>*(Months 13–18 / 120 Days)*| **Platform Pod:** `SDK-01` (Headless REST/tRPC), `SDK-02` (`@dios/sdk`)<br/>`SDK-03` (`@dios/cli`), `AUTH-06` (API Keys)<br/>**Ecosystem Pod:** `PLG-05` (`@dios/plugin-sdk`) | Transforms DIOS into an open headless platform. Releases official npm package (`@dios/sdk`), public API router (`/api/v1/*`), CLI toolchain (`npx @dios/cli init`), and GitHub Action (`@dios/action`). |
 | **Sprint 12 (`Future`)**<br/>*(Months 19–24 / 180 Days)*| **Ecosystem Pod:** `CNV-09` (WebXR 3D Canvas), `SDK-07` (Spatial SDK)<br/>**AI Pod:** `AI-11` (Autonomous Watchdog)<br/>**Enterprise Pod:** `DEP-06` (Air-Gapped Sharder) | Conquers Category Frontiers. Mounts Three.js / React Three Fiber spatial 3D canvas rendering (`WebXR`). Activates background multi-agent watchdog loop auto-repairing broken customer edge sites. |
+
+### Final preserved reassignments
+
+- Sprint 7 additionally receives `AI-005`, `AI-007`, and `CNV-006`; `GIT-005` has moved to Sprint 6.
+- Sprint 8 additionally receives `CMP-002`, `PRJ-005`, and `BIL-004` alongside `WS-006`.
+- Sprint 10 receives `ENT-001..002` activation with the remaining enterprise scope.
+- Sprint 7H is post-GA assurance recertification and still blocks Sprint 8.
 
 ---
 

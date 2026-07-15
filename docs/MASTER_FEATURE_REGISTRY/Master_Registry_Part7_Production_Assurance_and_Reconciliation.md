@@ -2,7 +2,7 @@
 ## Part 7: Canonical Reconciliation & Production Assurance Inventory
 
 **Status:** Active addendum  
-**Effective date:** 2026-07-14
+**Effective date:** 2026-07-15
 
 ---
 
@@ -66,3 +66,27 @@ These features preserve and strengthen existing architecture:
 - `API-001` governs public compatibility on top of existing API/SDK features.
 
 No existing feature is removed, renamed destructively, or rescheduled by this addendum except the explicit conflict corrections in the reconciliation document.
+
+## 8. Final pre-GA trust overlay
+
+The following nine canonical features close customer-journey and validation gaps from `docs/Moolox_2031.md` while preserving existing architecture:
+
+| ID | Capability | Sprint | Existing foundation extended |
+|:---|:---|:---:|:---|
+| `PRJ-008` | Production persistence/save transaction | 5 | `PRJ-001..004`, `CORE-002`, DB/RLS |
+| `GIT-009` | Brownfield repository compatibility report | 5 | `GIT-001..004`, `AST-002` |
+| `AST-011` | Safe editability/confidence map | 5 | AST scope, Canvas, AI pruning |
+| `CHG-001` | Semantic change/minimal-diff contract | 5 | AST patch, Git diff, audit, project versions |
+| `REV-001` | Designer-readable visual PR | 6 | Git, Canvas, deployment previews |
+| `PRV-001` | Consent and AI-memory controls | 6 | Auth, analytics, AI memory, audit |
+| `BIL-007` | Canonical billing lifecycle/economics | 6 | Billing, metering, analytics |
+| `TST-002` | Round-trip corpus and golden journeys | 6 | `TST-001` and core product loop |
+| `VAL-001` | Paid design-partner release gate | 6 | Product discovery and release governance |
+
+### Non-duplication and timing
+
+- `REV-001` is the constrained GA single-change review path; later `PRJ-006`/`COL-005` provide broad branching and collaborative review.
+- `PRV-001` gates analytics and learning before GA; `DLC-001..002` later provide full tenant lifecycle and portability.
+- `TST-002` proves product-specific fidelity; `TST-001` remains the general production CI matrix.
+- `VAL-001` is a release decision gate, not a software module.
+- P0 assurance features receive initial Sprint 6 certification and Sprint 7H recertification before Sprint 8.

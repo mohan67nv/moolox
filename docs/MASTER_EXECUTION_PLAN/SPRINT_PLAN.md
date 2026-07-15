@@ -180,6 +180,45 @@ Launch our interactive **W3C Token Theme Studio** (`Light/Dark mode inverter`). 
 - **Risk:** Token color scale inversion generating muddy mid-tones. **Mitigation:** Use HSL perceptual luminance curves (`Luminance inversion math`) inside `TKN-04`.
 - **Testing:** Visual regression suite rendering all 50 brand presets across all 11 core components, asserting zero visual overlap or unreadable text.
 
+> **SUPERSEDED BY FINAL PRE-GA OVERLAY:** The historical Sprint 5 above is preserved for traceability. The binding Sprint 5 is defined below under the authority of `CANONICAL_RECONCILIATION.md`.
+
+## FINAL SPRINT 5: INTEGRATED REPOSITORY WEDGE
+
+- **Assigned Release Bucket:** `v1.0 Public` pre-GA integration | **Duration:** `14 Calendar Days`
+- **Purpose:** Turn existing library prototypes into one authenticated, persisted, customer-visible workflow over a real supported Next.js repository.
+- **Canonical Features:** `PRJ-008`, `GIT-009`, `AST-011`, `CHG-001`, plus integration completion of `TKN-004`, `CMP-003..004`, and `CNV-005`.
+
+### Task 5.1 — Integrated application foundation and persistence (`PRJ-008`)
+
+- Mount real session/auth boundaries, workspace/project APIs, canvas route, and production-shaped dependencies.
+- Implement a type-safe transactional save endpoint that atomically persists AST, tokens, active version, and optimistic version.
+- Reject stale versions with `409`; reject cross-tenant access; restore the exact committed hash after refresh.
+- **Gate:** signup → workspace → project → edit → save → reload passes in Playwright without an in-memory substitute on the certified path.
+
+### Task 5.2 — Brownfield repository analysis (`GIT-009`, `AST-011`)
+
+- Analyze a linked existing Next.js repository without mutation.
+- Report supported files/components, unsupported constructs, parse failures, framework/dependency risk, tokens, routes, and remediation.
+- Classify every analyzed region as `editable`, `review-required`, or `read-only`, with machine-readable reasons.
+- Enforce boundaries in canvas and AI; unsupported regions cannot be silently rewritten.
+- **Gate:** editing remains disabled until the user accepts the report; attempts to mutate read-only regions fail safely and visibly.
+
+### Task 5.3 — Essential visual editing integration
+
+- Complete `TKN-004`, `CMP-003`, `CMP-004`, and `CNV-005` against persisted state and editability boundaries.
+- Existing early presets remain. Completion of exactly 50 presets (`CMP-002`) moves to Sprint 8.
+- **Gate:** theme, insertion, props, and responsive changes persist, serialize, and stay within approved regions.
+
+### Task 5.4 — Semantic change object (`CHG-001`)
+
+- Create one immutable record linking intent, base SHA/version, semantic IDs, AST patch, source diff, checks, actor, review state, deployment state, and outcome references.
+- Preserve unchanged files byte-for-byte where applicable and unchanged AST references semantically.
+- **Gate:** unrelated file and unrelated semantic-node mutation counts are zero.
+
+### Sprint 5 exit gate
+
+A user connects a real repository, receives compatibility/editability results, performs and persists one supported change, and obtains a minimal buildable source diff. Sprint 5 does not certify GA.
+
 ---
 
 # SPRINT 6: ORCHESTRATION EXPANSION, BILLING & `v1.0 PUBLIC` EXIT GATE
@@ -206,6 +245,43 @@ Activate specialized AI agents (`ORC-06 Layout`, `ORC-07 UX Specialist`, `ORC-13
 ### 5. Execution Risks & Testing Strategy
 - **Risk:** Specialized agents hallucinating invalid React props. **Mitigation:** All specialist output must pipe through `AI-06` Reviewer Loop before reaching canvas.
 - **Testing:** Complete public readiness penetration and load test (`1,000 concurrent AI prompt turns`, `10,000 edge site hits`). **EXIT GATE: `v1.0 PUBLIC LAUNCH` CERTIFIED.**
+
+> **SUPERSEDED BY FINAL PRE-GA OVERLAY:** The historical Sprint 6 above is preserved for traceability. It does not certify launch. The binding Sprint 6 follows.
+
+## FINAL SPRINT 6: TRUST, COMMERCIALIZATION, AND GA CERTIFICATION
+
+- **Assigned Release Bucket:** `v1.0 Public` | **Duration:** `14 Calendar Days`, subject to gates rather than calendar-only launch
+- **Canonical Features:** `GIT-005`, `AI-006`, `REV-001`, `DEP-004`, `BIL-003`, `ANA-002`, `PRV-001`, `BIL-007`, `MIG-001`, `BKP-001`, `SEC-001..002`, `GIT-007..008`, `OPS-001`, `TST-001..002`, `A11Y-001`, `VAL-001`.
+
+### Task 6.1 — Safe PR review and reconciliation (`GIT-005`, `AI-006`, `REV-001`)
+
+- Create a dedicated branch and normal GitHub PR from `CHG-001`.
+- Present source diff, semantic summary, responsive before/after, checks, risks, and approve/reject actions.
+- Merge SHA reconciles exactly to active project; conflicts or unsafe scopes pause instead of overwriting.
+- **Gate:** a supported change produces a buildable PR and rejection leaves the target branch unchanged.
+
+### Task 6.2 — Commercial, privacy, analytics, and domain integration
+
+- Complete `DEP-004`, one monetizable Pro entitlement (`BIL-003`), canonical billing lifecycle/economics (`BIL-007`), consent controls (`PRV-001`), and consent-gated `ANA-002`.
+- Signed/idempotent Stripe flows cover checkout, invoice, proration, retry, cancellation, and refund.
+- Analytics and optional learning remain off until explicit tenant consent; withdrawal stops collection; users can inspect/delete AI memory; source/prompts/secrets/raw assets never enter ordinary telemetry.
+- **Gate:** domain, billing, entitlement, consent, withdrawal, and approved gross-margin workload scenarios pass end to end.
+
+### Task 6.3 — Initial production-assurance certification
+
+- Implement and certify `MIG-001`, `BKP-001`, `SEC-001..002`, `GIT-007..008`, `OPS-001`, `TST-001`, and `A11Y-001` before GA.
+- **Gate:** empty/N-1 migrations, isolated PITR restore, duplicate/delayed/missed webhook convergence, force-push safety, credential rotation/revocation, cross-tenant security, required CI, WCAG 2.2 AA, and incident game day pass.
+
+### Task 6.4 — Public proof and customer validation (`TST-002`, `VAL-001`)
+
+- Maintain a versioned corpus of at least 10 non-demo repositories with 10 round-trip cycles each.
+- Certify signup → managed preview/live target and repository → first safe PR golden journeys.
+- Onboard 5–10 qualified design partners using real repositories; at least three must pay.
+- **Gate:** at least 90% of supported pilot PRs merge without manual code repair; all failures and unsupported cases are categorized; explicit retain/iterate/stop and GA decisions cite evidence.
+
+### Sprint 6 / GA exit gate
+
+GA requires all Tasks 6.1–6.4, zero unresolved P0/P1 data-loss/security/tenant-isolation/restore defects, approved pricing, redacted telemetry, documented support boundaries, and explicit release authorization. Calendar completion alone cannot certify release.
 
 ---
 

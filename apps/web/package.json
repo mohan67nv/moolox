@@ -15,6 +15,7 @@
   "dependencies": {
     "@moolox/ast-core": "workspace:*",
     "@moolox/ai": "workspace:*",
+    "@moolox/canvas": "workspace:*",
     "@moolox/tokens": "workspace:*",
     "@moolox/types": "workspace:*",
     "next": "^15.3.0",

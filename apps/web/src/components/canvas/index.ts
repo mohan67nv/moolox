@@ -11,3 +11,6 @@ export * from './ViewportMatrixSwitcher';
 export * from './WireframeToggle';
 export * from './PropertyInspector';
 export * from './ThemeSwitcher';
+export * from './ThemeStudioDrawer';
+export * from './ComponentDrawer';
+export * from './ColumnSplitter';

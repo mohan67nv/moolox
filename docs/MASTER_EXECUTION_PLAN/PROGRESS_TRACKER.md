@@ -10,9 +10,9 @@
 
 This document serves as the operational scorecard for our engineering leads, scrum masters, and executive stakeholders. As physical code is committed during Sprints 0 through 12, this matrix is updated dynamically to reflect exact status (`Not Started`, `In Progress`, `Testing`, `Completed`, `Blocked`, `Deferred`) and Completion % (`0% -> 100%`).
 
-### Current Executive Baseline Roll-Up (`Sprint 4 Planning Baseline`)
-- **Completed delivery:** Sprints 0–3 and the `v0.5 Alpha` exit gate, per `docs/SPRINT_COMPLETION_LEDGER.md`.
-- **Current sprint:** Sprint 4, pending Task 4.1 implementation.
+### Current Executive Baseline Roll-Up (`Final Pre-GA Planning Baseline`)
+- **Recorded implementation evidence:** Sprints 0–4, per `docs/SPRINT_COMPLETION_LEDGER.md`; this does not certify integration or release.
+- **Current sprint:** Sprint 5, not started.
 - **Canonical namespace:** `@moolox/*`; legacy `@dios/*` references are historical aliases.
 - **Added assurance scope:** 13 canonical features listed in `PRODUCTION_HARDENING_PLAN.md`.
 
@@ -196,5 +196,30 @@ This document serves as the operational scorecard for our engineering leads, scr
 | `DLC-002` | Portability and DSAR export | `10` | `Not Started` | `0%` | `DLC-001`, `PRJ-001`, `WS-005` |
 | `API-001` | API compatibility and error contract | `11` | `Not Started` | `0%` | `CORE-002`, `AUTH-006`, `SDK-001` |
 | `SEC-003` | Supply-chain integrity and provenance | `11` | `Not Started` | `0%` | `TST-001`, `GIT-006` |
+
+---
+
+# 8. FINAL PRE-GA TRUST & VALIDATION TRACKER
+
+| Feature ID | Feature Name | Sprint | Status | Completion | Blocker |
+|:---|:---|:---:|:---:|:---:|:---|
+| `PRJ-008` | Production persistence/save transaction | `5` | `Not Started` | `0%` | `PRJ-001..004`, `CORE-002`, `AUTH-002`, `DB-001` |
+| `GIT-009` | Brownfield onboarding/compatibility report | `5` | `Not Started` | `0%` | `AUTH-007`, `GIT-001..004`, `AST-002`, `TKN-001` |
+| `AST-011` | Safe editability/confidence map | `5` | `Not Started` | `0%` | `GIT-009`, `AST-002..003`, `AIS-003`, `CNV-001..004` |
+| `CHG-001` | Semantic change/minimal-diff contract | `5` | `Not Started` | `0%` | `AST-011`, `PRJ-008`, `GIT-002..004`, `WS-005` |
+| `REV-001` | Designer-readable visual PR | `6` | `Not Started` | `0%` | `CHG-001`, `GIT-003..005`, `CNV-003`, `DEP-002..003` |
+| `PRV-001` | Consent and AI-memory controls | `6` | `Not Started` | `0%` | `AUTH-002`, `ANA-001`, `WS-005`; blocks `ANA-002` activation |
+| `BIL-007` | Canonical billing lifecycle/economics | `6` | `Not Started` | `0%` | `BIL-001..003`, `AUTH-003`, `ANA-001` |
+| `TST-002` | Round-trip corpus/golden journeys | `6` | `Not Started` | `0%` | `TST-001`, `GIT-009`, `AST-011`, `CHG-001`, `REV-001`, `PRJ-008` |
+| `VAL-001` | Paid design-partner release gate | `6` | `Not Started` | `0%` | `GIT-009`, `REV-001`, `BIL-007`, `TST-002` |
+
+## Binding status corrections
+
+- Sprint 4 rows remain `Implemented / evidence recorded`, not release-certified, until Sprint 5/6 integration gates pass.
+- `GIT-005` is assigned to Sprint 6.
+- `AI-005`, `AI-007`, `CNV-006` are assigned to Sprint 7.
+- `CMP-002`, `PRJ-005`, `BIL-004` are assigned to Sprint 8.
+- `ENT-001..002` are assigned to Sprint 10.
+- P0 assurance features receive initial Sprint 6 certification and Sprint 7H recertification.
 
 *— End of Canonical Engineering Progress Tracker —*
