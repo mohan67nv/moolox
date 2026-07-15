@@ -18,3 +18,4 @@ export * from './SafePRModal';
 export * from './MarketplaceDrawer';
 export * from './PluginSettingsModal';
 export * from './RecoveryControlPlane';
+export * from './MultiplayerCursorOverlay';

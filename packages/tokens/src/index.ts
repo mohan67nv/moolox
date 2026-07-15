@@ -12,3 +12,4 @@ export * from './theming/hslMath';
 export * from './theming/Inverter';
 export * from './theming/a11yVerifier';
 export * from './presets';
+export * from './figma/figmaSyncEngine';

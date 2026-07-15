@@ -9,4 +9,5 @@
 
 export * from './types';
 export * from './tracing/OTelTracer';
+export * from './tracing/crdtLatencyTracker';
 export * from './privacy/consentEngine';

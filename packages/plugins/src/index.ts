@@ -9,4 +9,5 @@
 export * from './manifest/manifestValidator';
 export * from './security/permissionFirewall';
 export * from './runtime/sandboxRuntime';
+export * from './runtime/webWorkerSandbox';
 export * from './hooks/pluginHooks';

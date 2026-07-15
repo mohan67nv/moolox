@@ -8,3 +8,5 @@
 
 export * from './viewport/breakpointMath';
 export * from './a11y/A11YConformanceGate';
+export * from './crdt/crdtSyncEngine';
+export * from './crdt/presenceRoom';
