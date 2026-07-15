@@ -1,9 +1,14 @@
 /**
- * @moolox/marketplace — Creator component marketplace and Stripe Connect
+ * @moolox/marketplace — Plugin & Template Marketplace Engine (`MKT-001..005`)
  *
- * Feature IDs: MKT-01 MKT-02 MKT-03 MKT-04 MKT-05 MKT-06 MKT-07
+ * Provides marketplace cataloging, one-click workspace installation, template verification,
+ * creator monetization ledgers, and ephemeral sandbox inspection previews.
  *
  * Copyright © 2026 Moolox. All Rights Reserved.
  */
 
-export {};
+export * from './registry/marketplaceCatalog';
+export * from './installation/pluginInstaller';
+export * from './verification/templateVerifier';
+export * from './monetization/creatorLedger';
+export * from './preview/sandboxPreviewEngine';

@@ -15,3 +15,5 @@ export * from './ThemeStudioDrawer';
 export * from './ComponentDrawer';
 export * from './ColumnSplitter';
 export * from './SafePRModal';
+export * from './MarketplaceDrawer';
+export * from './PluginSettingsModal';

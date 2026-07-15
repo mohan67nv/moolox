@@ -1,9 +1,12 @@
 /**
- * @moolox/plugins — Web Worker plugin sandbox and SDK
+ * @moolox/plugins — Plugin Manifest & Sandboxed Extension SDK (`PLG-001..004`)
  *
- * Feature IDs: PLG-01 PLG-02 PLG-03 PLG-04 PLG-05 PLG-06
+ * Provides manifest validation, permission firewalls, sandboxed RPC execution, and hook injection points.
  *
  * Copyright © 2026 Moolox. All Rights Reserved.
  */
 
-export {};
+export * from './manifest/manifestValidator';
+export * from './security/permissionFirewall';
+export * from './runtime/sandboxRuntime';
+export * from './hooks/pluginHooks';

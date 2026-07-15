@@ -38,6 +38,12 @@ importers:
       '@moolox/git':
         specifier: workspace:*
         version: link:../../packages/git
+      '@moolox/marketplace':
+        specifier: workspace:*
+        version: link:../../packages/marketplace
+      '@moolox/plugins':
+        specifier: workspace:*
+        version: link:../../packages/plugins
       '@moolox/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
@@ -305,6 +311,15 @@ importers:
 
   packages/marketplace:
     dependencies:
+      '@moolox/ast-core':
+        specifier: workspace:*
+        version: link:../ast-core
+      '@moolox/plugins':
+        specifier: workspace:*
+        version: link:../plugins
+      '@moolox/tokens':
+        specifier: workspace:*
+        version: link:../tokens
       '@moolox/types':
         specifier: workspace:*
         version: link:../types
@@ -312,6 +327,9 @@ importers:
       typescript:
         specifier: ^5.8.0
         version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@22.20.1)
 
   packages/plugins:
     dependencies:
@@ -322,6 +340,9 @@ importers:
       typescript:
         specifier: ^5.8.0
         version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@22.20.1)
 
   packages/project:
     dependencies:
