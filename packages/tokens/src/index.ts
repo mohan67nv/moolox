@@ -10,4 +10,5 @@ export * from './compiler/tailwind';
 export * from './compiler/enforce';
 export * from './theming/hslMath';
 export * from './theming/Inverter';
+export * from './theming/a11yVerifier';
 export * from './presets';

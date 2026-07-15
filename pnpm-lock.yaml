@@ -20,12 +20,24 @@ importers:
       '@moolox/ai':
         specifier: workspace:*
         version: link:../../packages/ai
+      '@moolox/analytics':
+        specifier: workspace:*
+        version: link:../../packages/analytics
       '@moolox/ast-core':
         specifier: workspace:*
         version: link:../../packages/ast-core
+      '@moolox/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
+      '@moolox/billing':
+        specifier: workspace:*
+        version: link:../../packages/billing
       '@moolox/canvas':
         specifier: workspace:*
         version: link:../../packages/canvas
+      '@moolox/git':
+        specifier: workspace:*
+        version: link:../../packages/git
       '@moolox/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
@@ -224,9 +236,21 @@ importers:
 
   packages/deploy:
     dependencies:
+      '@moolox/analytics':
+        specifier: workspace:*
+        version: link:../analytics
       '@moolox/ast-core':
         specifier: workspace:*
         version: link:../ast-core
+      '@moolox/auth':
+        specifier: workspace:*
+        version: link:../auth
+      '@moolox/billing':
+        specifier: workspace:*
+        version: link:../billing
+      '@moolox/git':
+        specifier: workspace:*
+        version: link:../git
       '@moolox/tokens':
         specifier: workspace:*
         version: link:../tokens

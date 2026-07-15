@@ -83,4 +83,13 @@ export class InstantRollbackEngine {
   getActiveVersion(projectId: string): string | null {
     return InstantRollbackEngine.activePointers.get(projectId) || null;
   }
+
+  /**
+   * Static helper for instant execution across monitors and game day simulators (`DEP-003`, `OPS-001`).
+   */
+  static async executeRollback(request: RollbackRequest): Promise<RollbackResult> {
+    return new InstantRollbackEngine().rollbackVersion(request);
+  }
 }
+
+export { InstantRollbackEngine as InstantRollback };

@@ -13,3 +13,6 @@ export * from './types';
 export * from './compiler/StaticExporter';
 export * from './publisher/CloudflareAnycast';
 export * from './rollback/InstantRollback';
+export * from './domain/customDomainEngine';
+export * from './ops/incidentGameDay';
+export * from './ga/goldenJourneySignOff';

@@ -13,9 +13,13 @@
     "clean": "rm -rf .next .turbo coverage"
   },
   "dependencies": {
-    "@moolox/ast-core": "workspace:*",
     "@moolox/ai": "workspace:*",
+    "@moolox/analytics": "workspace:*",
+    "@moolox/ast-core": "workspace:*",
+    "@moolox/auth": "workspace:*",
+    "@moolox/billing": "workspace:*",
     "@moolox/canvas": "workspace:*",
+    "@moolox/git": "workspace:*",
     "@moolox/tokens": "workspace:*",
     "@moolox/types": "workspace:*",
     "next": "^15.3.0",

@@ -200,4 +200,11 @@ export class ThemeInverterEngine {
   public static switchMode(doc: TokenDocument, targetMode: ColorMode): InversionResult {
     return invertTokenDocument(doc, targetMode);
   }
+
+  /**
+   * Static helper delegating to perceptual HSL contrast calculation (`A11Y-001`).
+   */
+  public static calculateContrastRatio(hex1: string, hex2: string): number {
+    return calculateContrastRatio(hex1, hex2);
+  }
 }

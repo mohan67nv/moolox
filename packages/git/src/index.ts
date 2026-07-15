@@ -91,3 +91,23 @@ export {
 export { handlePushWebhook } from './sync/webhook-pull';
 
 export type { WebhookPullResult } from './sync/webhook-pull';
+
+// Safe PR Review & Reconciliation (GIT-005, AI-006, REV-001)
+export {
+  evaluatePRRiskAndChecks,
+  checkMergeConflictsOrUnsafeScope,
+  createPullRequestFromChangeSet,
+  verifyPRMergeReconciliation,
+  SafePRError,
+} from './sync/safe-pr';
+
+export type {
+  SemanticSummary,
+  SafePullRequestInput,
+  SafePullRequestResult,
+  PRReconciliationResult,
+} from './sync/safe-pr';
+
+// Force-Push Safety & Webhook Convergence (GIT-007, GIT-008)
+export { ForcePushGuard, WebhookConvergenceEngine } from './sync/webhook-convergence';
+export type { ForcePushSafetyAudit, WebhookEventRecord } from './sync/webhook-convergence';

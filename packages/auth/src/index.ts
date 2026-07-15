@@ -14,3 +14,4 @@ export * from './rbac';
 export * from './billing-gate';
 export * from './sso';
 export * from './middleware';
+export * from './security/tenantSecurityEngine';

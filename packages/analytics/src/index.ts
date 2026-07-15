@@ -9,3 +9,4 @@
 
 export * from './types';
 export * from './tracing/OTelTracer';
+export * from './privacy/consentEngine';

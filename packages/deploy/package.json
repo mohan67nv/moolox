@@ -15,7 +15,11 @@
   "dependencies": {
     "@moolox/types": "workspace:*",
     "@moolox/ast-core": "workspace:*",
-    "@moolox/tokens": "workspace:*"
+    "@moolox/tokens": "workspace:*",
+    "@moolox/billing": "workspace:*",
+    "@moolox/auth": "workspace:*",
+    "@moolox/git": "workspace:*",
+    "@moolox/analytics": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.0",

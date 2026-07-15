@@ -11,3 +11,4 @@
 export * from './types';
 export * from './quotas/FreeQuotaGate';
 export * from './webhooks/StripeHandler';
+export * from './lifecycle/billingLifecycleEngine';

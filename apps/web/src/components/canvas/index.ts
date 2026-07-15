@@ -14,3 +14,4 @@ export * from './ThemeSwitcher';
 export * from './ThemeStudioDrawer';
 export * from './ComponentDrawer';
 export * from './ColumnSplitter';
+export * from './SafePRModal';
