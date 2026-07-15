@@ -38,3 +38,41 @@ export interface StripeWebhookEvent {
     object: Record<string, any>;
   };
 }
+
+export interface StripeConnectAccount {
+  creatorId: string;
+  stripeAccountId: string;
+  accountType: 'express' | 'standard';
+  payoutsEnabled: boolean;
+  chargesEnabled: boolean;
+  detailsSubmitted: boolean;
+  onboardingUrl?: string;
+  createdTimestamp: number;
+}
+
+export interface ConnectTransferRecord {
+  transferId: string;
+  creatorId: string;
+  stripeAccountId: string;
+  transactionId: string;
+  amountCents: number;
+  currency: string;
+  status: 'pending' | 'succeeded' | 'failed' | 'reversed';
+  timestamp: number;
+}
+
+export interface MarketplacePurchaseRecord {
+  purchaseId: string;
+  marketplaceItemId: string;
+  buyerWorkspaceId: string;
+  creatorId: string;
+  grossAmountCents: number;
+  creatorPayoutCents: number;
+  platformFeeCents: number;
+  currency: string;
+  stripeChargeId?: string;
+  transferId?: string;
+  status: 'completed' | 'refunded' | 'failed';
+  timestamp: number;
+}
+

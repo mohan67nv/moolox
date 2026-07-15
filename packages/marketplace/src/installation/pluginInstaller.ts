@@ -75,8 +75,70 @@ export class WorkspacePluginBindingEngine {
 
     // Boot into sandboxed engine (`PLG-002`)
     PluginSandboxEngine.loadPlugin(validation.manifest);
+    MarketplaceCatalogRegistry.incrementDownloadCount(marketplaceItemId);
 
     return { success: true, installation: record };
+  }
+
+  /**
+   * Installs and clones a marketplace AST template or component into a project tree (`MKT-002`, `WS-006`, `PRJ-006`).
+   */
+  static async installTemplateToProject(
+    workspaceId: string,
+    projectId: string,
+    marketplaceItemId: string,
+    targetProjectRoot: Record<string, any>,
+    targetParentId: string = 'root'
+  ): Promise<{ success: boolean; clonedAST?: Record<string, any>; error?: string }> {
+    const item = MarketplaceCatalogRegistry.getItem(marketplaceItemId);
+
+    if (!item) {
+      return { success: false, error: `Marketplace item '${marketplaceItemId}' not found.` };
+    }
+
+    if (item.type !== 'template' && item.type !== 'component') {
+      return { success: false, error: `Item '${marketplaceItemId}' is not an installable AST template/component.` };
+    }
+
+    if (!item.verified || !item.templateAST) {
+      return { success: false, error: `Installation blocked: Template '${item.title}' has not passed verification (` + `MKT-003` + `) or lacks valid AST payload.` };
+    }
+
+    // Remap ID via simple UUID generator
+    const hex = (len: number) => Array.from({ length: len }, () => Math.floor(Math.random() * 16).toString(16)).join('');
+    const clonedAST = JSON.parse(JSON.stringify(item.templateAST));
+    clonedAST.nodeId = `node-${hex(8)}-${hex(4)}-4${hex(3)}-a${hex(3)}-${hex(12)}`;
+
+    let parentFound = false;
+    const findAndAppend = (node: Record<string, any>): boolean => {
+      if (node.nodeId === targetParentId) {
+        if (!Array.isArray(node.children)) node.children = [];
+        node.children.push(clonedAST);
+        parentFound = true;
+        return true;
+      }
+      if (Array.isArray(node.children)) {
+        for (const child of node.children) {
+          if (findAndAppend(child)) return true;
+        }
+      }
+      return false;
+    };
+
+    if (targetParentId === 'root' || targetParentId === targetProjectRoot.nodeId) {
+      if (!Array.isArray(targetProjectRoot.children)) targetProjectRoot.children = [];
+      targetProjectRoot.children.push(clonedAST);
+      parentFound = true;
+    } else {
+      findAndAppend(targetProjectRoot);
+    }
+
+    if (!parentFound) {
+      return { success: false, error: `Target parent container '${targetParentId}' not found in project '${projectId}'.` };
+    }
+
+    MarketplaceCatalogRegistry.incrementDownloadCount(marketplaceItemId);
+    return { success: true, clonedAST };
   }
 
   /**

@@ -90,4 +90,44 @@ describe('MarketplaceCatalogRegistry & PluginInstaller (MKT-001, MKT-002)', () =
     expect(removed).toBe(true);
     expect(WorkspacePluginBindingEngine.getInstalledPlugins('ws-alpha-123')).toHaveLength(0);
   });
+
+  it('seeds default items and retrieves creator profile storefront with download metrics (`MKT-001`, `MKT-002`)', () => {
+    MarketplaceCatalogRegistry.seedDefaultItems();
+    const profile = MarketplaceCatalogRegistry.getStorefrontByCreator('moolox-core');
+
+    expect(profile).toBeDefined();
+    expect(profile?.displayName).toBe('Moolox Official Core Team');
+    expect(profile?.totalItems).toBe(2);
+    expect(profile?.totalDownloads).toBe(2070); // 1420 + 650
+
+    // Test increment download counter on install
+    MarketplaceCatalogRegistry.incrementDownloadCount('item-seo-audit-plugin');
+    const updated = MarketplaceCatalogRegistry.getItem('item-seo-audit-plugin');
+    expect(updated?.downloadsCount).toBe(1421);
+  });
+
+  it('installs and clones an AST template/component directly into target project tree (`WS-006`, `PRJ-006`)', async () => {
+    MarketplaceCatalogRegistry.seedDefaultItems();
+
+    const targetRoot: Record<string, any> = {
+      nodeId: 'root',
+      type: 'Page',
+      children: [],
+    };
+
+    const res = await WorkspacePluginBindingEngine.installTemplateToProject(
+      'ws-demo',
+      'prj-landing',
+      'item-saas-hero-pro',
+      targetRoot
+    );
+
+    expect(res.success).toBe(true);
+    expect(res.clonedAST?.type).toBe('HeroContainer');
+    expect(res.clonedAST?.nodeId).toMatch(/^node-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
+    expect(targetRoot.children).toHaveLength(1);
+
+    const item = MarketplaceCatalogRegistry.getItem('item-saas-hero-pro');
+    expect(item?.downloadsCount).toBe(651); // incremented from 650
+  });
 });

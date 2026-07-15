@@ -6,4 +6,4 @@
  * Copyright © 2026 Moolox. All Rights Reserved.
  */
 
-export {};
+export * from './packaging/componentPackager';

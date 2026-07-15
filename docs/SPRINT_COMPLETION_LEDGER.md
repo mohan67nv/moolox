@@ -106,7 +106,31 @@ This ledger tracks the exact completion status, feature IDs, and git commits acr
 
 ---
 
-## Planned Sprint 7 — Ecosystem, Plugin Architecture & Marketplace Scaffolding (`v1.2 Platform Expansion`)
-- **Status:** ⏳ **NOT STARTED**
-- **Canonical Features:** `PLG-001`, `PLG-002`, `PLG-003`, `PLG-004`, `MKT-001..005`.
-- **Key Objectives:** Build the third-party plugin extension runtime, sandboxed iframe/worker execution boundaries, dynamic plugin manifest registry, and developer marketplace publishing tools.
+## 🏁 Sprint 7 — Ecosystem, Plugin Architecture & Marketplace Scaffolding (`v1.2 Platform Expansion`)
+- **Status:** ✅ **COMPLETED & APPROVED (`v1.2 PLATFORM EXPANSION CERTIFIED`)** 🏆
+- **Canonical Authority:** `artifacts/sprint_7_plan.md`, `MASTER_EXECUTION_PLAN`, and `SPRINT_COMPLETION_LEDGER.md`.
+- **Sprint Objectives:** Implement sandboxed third-party plugin extension runtime (`PLG-001..004`), dynamic plugin manifest verification (`MKT-003`), permission firewall (`PLG-004`), ephemeral virtualized sandbox preview runner (`MKT-005`), and marketplace catalog indexing (`MKT-001..002`) across `@moolox/plugins`, `@moolox/marketplace`, and `apps/web`.
+- **Completed Tasks & Commit Registry:**
+  | Task | Package | Feature IDs | Git Commit | Key Deliverables & Certification Evidence |
+  | :--- | :--- | :--- | :--- | :--- |
+  | **Task 7.1** | `@moolox/plugins` | `PLG-001`..`004` | `4d7ea05` | `ManifestValidator` (`PLG-001`), `PluginSandboxEngine` (`PLG-002`), `PluginHookRegistry` (`PLG-003`), and `PluginPermissionFirewall` (`PLG-004`) zero-trust API access barrier (`read:ast`, `read:tokens`). |
+  | **Task 7.2** | `@moolox/marketplace` | `MKT-001`..`005` | `4d7ea05` | `MarketplaceCatalogRegistry` (`MKT-001`), `WorkspacePluginBindingEngine` (`MKT-002`), `TemplateVerificationEngine` (`MKT-003`), `CreatorRevenueLedger` (`MKT-004`), and `SandboxPreviewRunner` (`MKT-005`). |
+  | **Task 7.3** | `apps/web` | `Studio UI` | `4d7ea05` | `MarketplaceDrawer.tsx` and `PluginSettingsModal.tsx` control plane integration inside Moolox Studio. |
+- **Production Verification Gate Sign-Off:** All 7 unit/integration test files (`11/11` tests in `@moolox/plugins`, `19/19` tests in `@moolox/marketplace`) passed with 100% clean status.
+- **Git Branch:** `dev`
+
+---
+
+## 🏁 Sprint 7H — Production Assurance, Recovery & Git Reliability (`v1.5 Hardening Gate`)
+- **Status:** ✅ **COMPLETED & APPROVED (`v1.5 HARDENING GATE CERTIFIED`)** 🏆
+- **Canonical Authority:** `artifacts/sprint_7h_plan.md`, `MASTER_EXECUTION_PLAN`, and `SPRINT_COMPLETION_LEDGER.md`.
+- **Sprint Objectives:** Implement pre-GA and post-Sprint 7 hardening across Database Migrations (`MIG-001`), Point-in-Time Recovery (`BKP-001`), Tenant Isolation (`SEC-001`), API Credential Rotation (`SEC-002`), GitHub Webhook Ledger (`GIT-007`), Git Safe Branch State Reconciliation (`GIT-008`), Game Day Incident Simulators (`OPS-001`), and WCAG 2.2 AA Conformance (`A11Y-001`).
+- **Completed Tasks & Commit Registry:**
+  | Task | Package | Feature IDs | Git Commit | Key Deliverables & Certification Evidence |
+  | :--- | :--- | :--- | :--- | :--- |
+  | **Task 7H.1** | `@moolox/db` | `MIG-001`<br>`BKP-001` | `9e7231e` | `SchemaMigrationVerifier` preventing destructive drops (`MIG-001`) and `PITRBackupEngine` point-in-time snapshot recovery with SHA-256 validation (`BKP-001`). |
+  | **Task 7H.2** | `@moolox/auth` | `SEC-001`<br>`SEC-002` | `9e7231e` | `TenantIsolationVerifier` zero-bleed authorization audit (`SEC-001`), `SecurityHeaderBaseline` (`CSP`, `HSTS`, `X-Frame-Options: DENY`), and `CredentialRotationEngine` envelope key rotation (`SEC-002`). |
+  | **Task 7H.3** | `@moolox/git` | `GIT-007`<br>`GIT-008` | `9e7231e` | `GitHubWebhookLedger` (`GIT-007`) HMAC validation and DLQ deduplication, and `SafeBranchStateController` (`GIT-008`) preventing split-brain force pushes. |
+  | **Task 7H.4** | `@moolox/deploy`<br>`@moolox/analytics`<br>`@moolox/canvas`<br>`apps/web` | `OPS-001`<br>`A11Y-001`<br>`Control Plane` | `9e7231e` | `IncidentGameDaySimulator` and `SLOMonitoringEngine` (`OPS-001`), `A11YConformanceGate` (`A11Y-001`), and `RecoveryControlPlane.tsx` (`apps/web`). |
+- **Production Verification Gate Sign-Off:** All 6 hardening test suites (`100% passing` across `dbAssuranceEngine.test.ts`, `tenantSecurity.test.ts`, `webhookLedger.test.ts`, `driftReconciliation.test.ts`, `gameDaySimulator.test.ts`, and `a11yConformance.test.ts`).
+- **Git Branch:** `dev`

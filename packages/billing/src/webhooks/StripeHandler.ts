@@ -11,6 +11,7 @@
 
 import { type StripeWebhookEvent, type SubscriptionTier } from '../types';
 import { FreeQuotaGate } from '../quotas/FreeQuotaGate';
+import { StripeConnectBillingEngine } from '../connect/StripeConnectEngine';
 
 export class StripeWebhookHandler {
   /**
@@ -25,9 +26,9 @@ export class StripeWebhookHandler {
   }
 
   /**
-   * Processes verified Stripe webhook events and mutates workspace quota ledger (`BIL-001`).
+   * Processes verified Stripe webhook events and mutates workspace quota ledger (`BIL-001`, `BIL-004`).
    */
-  static async handleEvent(event: StripeWebhookEvent): Promise<{ processed: boolean; action: string; workspaceId?: string }> {
+  static async handleEvent(event: StripeWebhookEvent): Promise<{ processed: boolean; action: string; workspaceId?: string; creatorId?: string }> {
     const obj = event.data?.object || {};
     const workspaceId = obj.metadata?.workspace_id || obj.client_reference_id || 'ws-default';
 
@@ -49,8 +50,33 @@ export class StripeWebhookHandler {
         return { processed: true, action: `Downgraded workspace '${workspaceId}' to FREE tier (500 credits/mo quota).`, workspaceId };
       }
 
+      case 'account.updated': {
+        const creatorId = obj.metadata?.creator_id || obj.id;
+        if (obj.details_submitted && obj.payouts_enabled) {
+          try {
+            StripeConnectBillingEngine.completeOnboarding(creatorId);
+            return { processed: true, action: `Stripe Connect onboarding completed for creator '${creatorId}'. Payouts activated.`, creatorId };
+          } catch (err: any) {
+            return { processed: false, action: `Failed to activate Connect account for '${creatorId}': ${err.message}`, creatorId };
+          }
+        }
+        return { processed: true, action: `Updated Stripe Connect account state for '${creatorId}'.`, creatorId };
+      }
+
+      case 'charge.refunded': {
+        const purchaseId = obj.metadata?.purchase_id || obj.id;
+        const reconciled = StripeConnectBillingEngine.reconcileRefund(purchaseId);
+        return { processed: reconciled, action: reconciled ? `Reconciled refund for purchase '${purchaseId}' and reversed creator transfer.` : `No active purchase found for refund '${purchaseId}'.` };
+      }
+
+      case 'transfer.reversed': {
+        const transferId = obj.id;
+        return { processed: true, action: `Stripe Connect payout transfer '${transferId}' reversed.` };
+      }
+
       default:
         return { processed: false, action: `Ignored unhandled Stripe event type: ${event.type}`, workspaceId };
     }
   }
 }
+

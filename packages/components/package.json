@@ -7,13 +7,17 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "lint": "echo 'lint pass'",
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
+    "@moolox/ast-core": "workspace:*",
+    "@moolox/tokens": "workspace:*",
     "@moolox/types": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
   }
 }
