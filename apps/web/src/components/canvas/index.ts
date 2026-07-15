@@ -17,3 +17,4 @@ export * from './ColumnSplitter';
 export * from './SafePRModal';
 export * from './MarketplaceDrawer';
 export * from './PluginSettingsModal';
+export * from './RecoveryControlPlane';

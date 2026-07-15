@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
   TenantIsolationVerifier,
+  SecurityHeaderBaseline,
   CredentialRotationEngine,
 } from '../src/security/tenantSecurityEngine';
 
@@ -20,6 +21,23 @@ describe('Cross-Tenant Isolation & Credential Rotation/Revocation Engine (SEC-00
       const audit = TenantIsolationVerifier.verifyTenantAccess('ws-attacker', 'ws-victim', 'res-secret-999');
       expect(audit.allowed).toBe(false);
       expect(audit.violationType).toBe('CROSS_TENANT_BLEED_ATTEMPT');
+    });
+  });
+
+  describe('SecurityHeaderBaseline (SEC-001)', () => {
+    it('generates strict CSP, HSTS, X-Frame-Options, and Permissions-Policy headers with unique nonces', () => {
+      const audit = SecurityHeaderBaseline.generateEdgeHeaders('test-nonce-123');
+      expect(audit.isSecure).toBe(true);
+      expect(audit.nonce).toBe('test-nonce-123');
+      expect(audit.headers['Strict-Transport-Security']).toContain('max-age=63072000');
+      expect(audit.headers['X-Frame-Options']).toBe('DENY');
+      expect(audit.headers['Content-Security-Policy']).toContain("'nonce-test-nonce-123'");
+    });
+
+    it('validates CSRF tokens and request origins correctly', () => {
+      expect(SecurityHeaderBaseline.verifyCSRFAndOrigin('https://dios.app', ['https://dios.app'], 'token-abc', 'token-abc')).toBe(true);
+      expect(SecurityHeaderBaseline.verifyCSRFAndOrigin('https://evil.com', ['https://dios.app'], 'token-abc', 'token-abc')).toBe(false);
+      expect(SecurityHeaderBaseline.verifyCSRFAndOrigin('https://dios.app', ['https://dios.app'], 'wrong-token', 'token-abc')).toBe(false);
     });
   });
 

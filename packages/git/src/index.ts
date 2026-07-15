@@ -111,3 +111,9 @@ export type {
 // Force-Push Safety & Webhook Convergence (GIT-007, GIT-008)
 export { ForcePushGuard, WebhookConvergenceEngine } from './sync/webhook-convergence';
 export type { ForcePushSafetyAudit, WebhookEventRecord } from './sync/webhook-convergence';
+
+export { GitHubWebhookLedger } from './sync/webhook-ledger';
+export type { WebhookDeliveryRecord } from './sync/webhook-ledger';
+
+export { SafeBranchStateController } from './sync/branch-state-controller';
+export type { DriftReconciliationAudit, UnsafeGitEventType, BranchSafetyState } from './sync/branch-state-controller';

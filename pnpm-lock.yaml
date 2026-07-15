@@ -35,6 +35,12 @@ importers:
       '@moolox/canvas':
         specifier: workspace:*
         version: link:../../packages/canvas
+      '@moolox/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@moolox/deploy':
+        specifier: workspace:*
+        version: link:../../packages/deploy
       '@moolox/git':
         specifier: workspace:*
         version: link:../../packages/git

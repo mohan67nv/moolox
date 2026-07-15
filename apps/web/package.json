@@ -19,6 +19,8 @@
     "@moolox/auth": "workspace:*",
     "@moolox/billing": "workspace:*",
     "@moolox/canvas": "workspace:*",
+    "@moolox/db": "workspace:*",
+    "@moolox/deploy": "workspace:*",
     "@moolox/git": "workspace:*",
     "@moolox/marketplace": "workspace:*",
     "@moolox/plugins": "workspace:*",

@@ -7,3 +7,4 @@
  */
 
 export * from './viewport/breakpointMath';
+export * from './a11y/A11YConformanceGate';
